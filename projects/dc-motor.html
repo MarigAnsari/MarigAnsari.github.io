@@ -7,70 +7,69 @@
 <meta name="description" content="Open-loop PWM motor drive on an Arduino, a derived motor model, and a simulated PID comparison in Simulink.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314161a'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23ff7b3a' stroke-width='2'/%3E%3C/svg%3E">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body class="sub">
 <a class="skip" href="#main">Skip to content</a>
+<div class="frame" aria-hidden="true"><ol><li data-z="A">A</li><li data-z="B" class=on>B</li><li data-z="C">C</li><li data-z="D">D</li><li data-z="E">E</li><li data-z="F">F</li><li data-z="G">G</li><li data-z="H">H</li></ol></div>
 <header class="bar">
   <div class="wrap bar-in">
     <a class="mark" href="../index.html#top">Marig Shabbir Ansari</a>
-    <nav aria-label="Primary">
-      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+    <p class="zread" aria-hidden="true"><span class="zk">Zone</span><span class="zl" data-zl>B</span><span class="zn" data-zn>Work</span></p>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav id="site-nav" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#index">Index</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+      <div class="theme" role="group" aria-label="Theme" hidden><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
     </nav>
   </div>
+  <div class="cols" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+  <span class="progress" aria-hidden="true"></span>
 </header>
 <main id="main">
 <div class="wrap phead">
-  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span> Work</a></p>
+  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span>&nbsp;Work</a></p>
   <div class="sheet psheet">
-    <div class="cell pnum" aria-hidden="true"><span>16</span></div>
+    <div class="cell pnum" aria-hidden="true"><span class="big-num">16</span><span class="of">/ 20</span></div>
     <div class="cell ptitle"><h1>DC Motor Speed Control Without Encoder</h1></div>
     <dl class="pmeta"><div class="cell pm wide"><dt>Domain</dt><dd>Controls and mechatronics</dd></div><div class="cell pm half l"><dt>Year</dt><dd>2025</dd></div><div class="cell pm half"><dt>Team</dt><dd>Team of 5</dd></div><div class="cell pm wide"><dt>Course</dt><dd>ME-464 System Dynamics and Controls</dd></div></dl>
   </div>
 </div>
 
-<section class="wrap psum" aria-label="Summary">
-  <div class="summary">
-    <div class="srow"><h2>What</h2><p>Open-loop PWM motor drive on an Arduino, a derived motor model, and a simulated PID comparison in Simulink.</p></div>
-    <div class="srow"><h2>Role</h2><p>Built an Arduino PWM drive for a DC motor, derived its electrical and mechanical model and simulated a PID loop in Simulink, in a team of 5.</p></div>
-    <div class="srow"><h2>Results</h2><ol class="sres"><li>Hardware: Arduino UNO, IBT-2 driver and a 5 V DC motor, with PWM on pins 5 and 6 and no encoder.</li><li>Motor ODEs and a transfer function from voltage to speed derived.</li><li>PID control exists in simulation only, where it reduced overshoot and removed steady-state error.</li></ol></div>
-  </div>
-  <div class="hero-fig"><figure class="fig">
-  <a class="fplate" href="../assets/img/dc-motor/hero-full.jpg" target="_blank" rel="noopener"><img src="../assets/img/dc-motor/hero-full.jpg" width="960" height="1280" style="--nw:960" alt="Built circuit with Arduino, IBT-2 driver, breadboard and DC motor." decoding="async"></a>
-  <figcaption>Built circuit with Arduino, IBT-2 driver, breadboard and DC motor.</figcaption>
-</figure></div>
-</section>
-
 <div class="wrap pdetail">
+<section class="prow" aria-labelledby="h-summary"><h2 id="h-summary">Summary</h2><div class="pbody"><div class="srows"><div class="sr-row"><h3>What</h3><p>Open-loop PWM motor drive on an Arduino, a derived motor model, and a simulated PID comparison in Simulink.</p></div><div class="sr-row"><h3>Role</h3><p>Built an Arduino PWM drive for a DC motor, derived its electrical and mechanical model and simulated a PID loop in Simulink, in a team of 5.</p></div><div class="sr-row"><h3>Results</h3><ol class="sres"><li>Hardware: Arduino UNO, IBT-2 driver and a 5 V DC motor, with PWM on pins 5 and 6 and no encoder.</li><li>Motor ODEs and a transfer function from voltage to speed derived.</li><li>PID control exists in simulation only, where it reduced overshoot and removed steady-state error.</li></ol></div></div>
+<div class="hero-fig"><figure class="fig"><a class="fplate plate " href="../assets/img/dc-motor/hero-full.jpg" data-fig data-n="FIG. 01" data-cap="Built circuit with Arduino, IBT-2 driver, breadboard and DC motor." data-cls=""><img src="../assets/img/dc-motor/hero-full.jpg" width="960" height="1280" style="--nw:960" alt="Built circuit with Arduino, IBT-2 driver, breadboard and DC motor." decoding="async"></a>
+  <figcaption><span class="fn">FIG. 01</span><span>Built circuit with Arduino, IBT-2 driver, breadboard and DC motor.</span></figcaption></figure></div></div></section>
 <section class="prow" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Design, model and test a low-cost DC motor speed controller without an encoder. Open-loop PWM sets the speed, and the study points to supply and load sensitivity as the limit of open-loop control.</p></div></section>
-<section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Hardware: Arduino UNO PWM outputs on pins 5 and 6 into an IBT-2 driver, a 5 V DC motor, a breadboard and a common ground, built from lab components at no extra cost.</li><li>Model: coupled electrical and mechanical ODEs, then a Laplace transform to a transfer function from input voltage to speed, with torque proportional to current and back EMF proportional to speed.</li><li>Simulink open-loop model using Arduino support blocks, then a closed-loop model with a PID controller added for simulation only.</li></ol></div></section>
-<section class="prow" aria-labelledby="h-equations"><h2 id="h-equations">Equations</h2><div class="pbody"><ol class="eqs"><li><code>Tm = Km ia; eb = Kb omega</code></li><li><code>La dia/dt + Ra ia + Kb omega = ein(t)</code></li><li><code>J domega/dt + b omega = Km ia - TL</code></li><li><code>J domega/dt + (b + Km Kb / Ra) omega = (Km / Ra) Vin</code></li><li><code>G(s) = Omega(s) / Vin(s) = (Km / Ra) / (J s + b + Km Kb / Ra)</code></li></ol></div></section>
-<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p>The open-loop Simulink scope shows a transient followed by a steady trend for the chosen PWM command. In the simulated PID response, speed first overshoots, then settles at the setpoint with steady-state error removed.</p></div></section>
+<section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><div class="with-figs"><ol class="steps"><li>Hardware: Arduino UNO PWM outputs on pins 5 and 6 into an IBT-2 driver, a 5 V DC motor, a breadboard and a common ground, built from lab components at no extra cost.</li><li>Model: coupled electrical and mechanical ODEs, then a Laplace transform to a transfer function from input voltage to speed, with torque proportional to current and back EMF proportional to speed.</li><li>Simulink open-loop model using Arduino support blocks, then a closed-loop model with a PID controller added for simulation only.</li></ol><div class="figcol"><figure class="fig"><a class="fplate plate is-chart" href="../assets/img/dc-motor/fig1.png" data-fig data-n="FIG. 02" data-cap="Simulink model of the DC motor with a PID speed controller." data-cls="is-chart"><img src="../assets/img/dc-motor/fig1.png" width="1020" height="592" style="--nw:1020" alt="Simulink model of the DC motor with a PID speed controller." decoding="async" loading="lazy"></a>
+  <figcaption><span class="fn">FIG. 02</span><span>Simulink model of the DC motor with a PID speed controller.</span></figcaption></figure></div></div></div></section>
+<section class="prow" aria-labelledby="h-equations"><h2 id="h-equations">Equations</h2><div class="pbody"><ol class="eqs"><li class="eq"><span class="eq-n">EQ. 1</span><code>Tm = Km ia; eb = Kb omega</code></li><li class="eq"><span class="eq-n">EQ. 2</span><code>La dia/dt + Ra ia + Kb omega = ein(t)</code></li><li class="eq"><span class="eq-n">EQ. 3</span><code>J domega/dt + b omega = Km ia - TL</code></li><li class="eq"><span class="eq-n">EQ. 4</span><code>J domega/dt + (b + Km Kb / Ra) omega = (Km / Ra) Vin</code></li><li class="eq"><span class="eq-n">EQ. 5</span><code>G(s) = Omega(s) / Vin(s) = (Km / Ra) / (J s + b + Km Kb / Ra)</code></li></ol></div></section>
+<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><div class="with-figs"><p class="ptext">The open-loop Simulink scope shows a transient followed by a steady trend for the chosen PWM command. In the simulated PID response, speed first overshoots, then settles at the setpoint with steady-state error removed.</p><div class="figcol"><figure class="fig"><a class="fplate plate " href="../assets/img/dc-motor/fig2.png" data-fig data-n="FIG. 03" data-cap="Open-loop Simulink scope output of motor speed." data-cls=""><img src="../assets/img/dc-motor/fig2.png" width="1600" height="758" style="--nw:1600" alt="Open-loop Simulink scope output of motor speed." decoding="async" loading="lazy"></a>
+  <figcaption><span class="fn">FIG. 03</span><span>Open-loop Simulink scope output of motor speed.</span></figcaption></figure></div></div></div></section>
 <section class="prow" aria-labelledby="h-limitations"><h2 id="h-limitations">Limitations</h2><div class="pbody"><ul class="bul"><li>The PID controller exists only in simulation, and the hardware has no feedback or encoder.</li><li>No motor parameter values, response times or measured speeds are given.</li><li>Linear model that ignores friction variation, saturation and supply variation.</li></ul></div></section>
-<section class="prow" aria-labelledby="h-figures"><h2 id="h-figures">Figures</h2><div class="pbody"><div class="figs"><figure class="fig">
-  <a class="fplate" href="../assets/img/dc-motor/fig1.png" target="_blank" rel="noopener"><img src="../assets/img/dc-motor/fig1.png" width="1020" height="592" style="--nw:1020" alt="Simulink model of the DC motor with a PID speed controller." decoding="async" loading="lazy"></a>
-  <figcaption>Simulink model of the DC motor with a PID speed controller.</figcaption>
-</figure><figure class="fig">
-  <a class="fplate" href="../assets/img/dc-motor/fig2.png" target="_blank" rel="noopener"><img src="../assets/img/dc-motor/fig2.png" width="1600" height="758" style="--nw:1600" alt="Open-loop Simulink scope output of motor speed." decoding="async" loading="lazy"></a>
-  <figcaption>Open-loop Simulink scope output of motor speed.</figcaption>
-</figure></div></div></section>
 <section class="prow" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2><div class="pbody"><ul class="tools"><li>Arduino</li><li>Simulink</li><li>MATLAB</li><li>IBT-2</li></ul></div></section>
 </div>
 
 <nav class="wrap pnav" aria-label="Projects">
-  <a class="pn prev" href="shaft-design.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span><span class="no">15</span> Statically Indeterminate Shaft Design</span></a>
-  <a class="all" href="../index.html#work">All work</a>
-  <a class="pn next" href="conveyor.html"><span class="mono">Next</span><span class="pn-t"><span class="no">17</span> Foot-Switch Material Handling Conveyor <span class="pn-a" aria-hidden="true">&rarr;</span></span></a>
+  <div class="pnav-row">
+    <div class="pos-wrap"><p class="pos-n">16<small>/ 20</small></p><p><a class="all lnk" href="../index.html#index">All work</a></p></div>
+    <a class="pn prev" href="shaft-design.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span> <span class="mono">15</span> Statically Indeterminate Shaft Design</span></a>
+    <a class="pn next" href="conveyor.html"><div class="plate fit-contain is-chart"><img src="../assets/img/conveyor/hero.jpg" width="664" height="613" style="--nw:664;--op:50% 50%" alt="" loading="lazy" decoding="async"><span class="crop" aria-hidden="true"></span></div><span class="pn-txt"><span class="mono">Next</span><span class="pn-t"><span class="mono">17</span> Foot-Switch Material Handling Conveyor <span class="pn-a" aria-hidden="true">&rarr;</span></span></span></a>
+  </div>
 </nav>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <p>Marig Shabbir Ansari</p>
-    <p class="mono">Mechanical Engineer</p>
-    <a href="../index.html#top">Back to top</a>
+  <div class="wrap">
+    <div class="tb">
+      <div><span class="k">Name</span><span class="v">Marig Shabbir Ansari</span></div>
+      <div><span class="k">Role</span><span class="v">Mechanical Engineer</span></div>
+      <div><span class="k">Sheet</span><span class="v sheetno">SHEET 1 OF 1</span></div>
+      <div><span class="k">Year</span><span class="v">2026</span></div>
+      <div><span class="k">Page</span><a class="v lnk" href="../index.html#top">Back to top</a></div>
+    </div>
   </div>
 </footer>
 <script src="../assets/js/site.js" defer></script>

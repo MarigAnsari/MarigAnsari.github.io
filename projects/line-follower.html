@@ -7,62 +7,66 @@
 <meta name="description" content="Three-wheel robot built and programmed in a mechatronics lab that follows a black line using three IR sensors.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314161a'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23ff7b3a' stroke-width='2'/%3E%3C/svg%3E">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body class="sub">
 <a class="skip" href="#main">Skip to content</a>
+<div class="frame" aria-hidden="true"><ol><li data-z="A">A</li><li data-z="B" class=on>B</li><li data-z="C">C</li><li data-z="D">D</li><li data-z="E">E</li><li data-z="F">F</li><li data-z="G">G</li><li data-z="H">H</li></ol></div>
 <header class="bar">
   <div class="wrap bar-in">
     <a class="mark" href="../index.html#top">Marig Shabbir Ansari</a>
-    <nav aria-label="Primary">
-      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+    <p class="zread" aria-hidden="true"><span class="zk">Zone</span><span class="zl" data-zl>B</span><span class="zn" data-zn>Work</span></p>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav id="site-nav" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#index">Index</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+      <div class="theme" role="group" aria-label="Theme" hidden><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
     </nav>
   </div>
+  <div class="cols" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+  <span class="progress" aria-hidden="true"></span>
 </header>
 <main id="main">
 <div class="wrap phead">
-  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span> Work</a></p>
+  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span>&nbsp;Work</a></p>
   <div class="sheet psheet">
-    <div class="cell pnum" aria-hidden="true"><span>19</span></div>
+    <div class="cell pnum" aria-hidden="true"><span class="big-num">19</span><span class="of">/ 20</span></div>
     <div class="cell ptitle"><h1>Arduino Line Following Robot</h1></div>
     <dl class="pmeta"><div class="cell pm wide"><dt>Domain</dt><dd>Embedded robotics</dd></div><div class="cell pm half l"><dt>Year</dt><dd>2025</dd></div><div class="cell pm half"><dt>Team</dt><dd>Team of 6</dd></div><div class="cell pm wide"><dt>Course</dt><dd>ME-447 Mechatronics Lab</dd></div></dl>
   </div>
 </div>
 
-<section class="wrap psum" aria-label="Summary">
-  <div class="summary">
-    <div class="srow"><h2>What</h2><p>Three-wheel robot built and programmed in a mechatronics lab that follows a black line using three IR sensors.</p></div>
-    <div class="srow"><h2>Role</h2><p>Assembled the acrylic chassis, wired and soldered the Arduino, L298N driver and three IR sensors, and programmed differential steering to follow a black line, in a team of 6.</p></div>
-    <div class="srow"><h2>Results</h2><ol class="sres"><li>Follows a black line on straight and curved paths.</li><li>Arduino Uno and an L298N driver run two DC motors on a 12 V supply.</li><li>Minor oscillations at sharp turns, and it regained the line without help.</li></ol></div>
-  </div>
-  <div class="hero-fig"><figure class="fig">
-  <a class="fplate" href="../assets/img/line-follower/hero-full.jpg" target="_blank" rel="noopener"><img src="../assets/img/line-follower/hero-full.jpg" width="1280" height="960" style="--nw:1280" alt="Assembled three-wheel robot with three IR sensors." decoding="async"></a>
-  <figcaption>Assembled three-wheel robot with three IR sensors.</figcaption>
-</figure></div>
-</section>
-
 <div class="wrap pdetail">
+<section class="prow" aria-labelledby="h-summary"><h2 id="h-summary">Summary</h2><div class="pbody"><div class="srows"><div class="sr-row"><h3>What</h3><p>Three-wheel robot built and programmed in a mechatronics lab that follows a black line using three IR sensors.</p></div><div class="sr-row"><h3>Role</h3><p>Assembled the acrylic chassis, wired and soldered the Arduino, L298N driver and three IR sensors, and programmed differential steering to follow a black line, in a team of 6.</p></div><div class="sr-row"><h3>Results</h3><ol class="sres"><li>Follows a black line on straight and curved paths.</li><li>Arduino Uno and an L298N driver run two DC motors on a 12 V supply.</li><li>Minor oscillations at sharp turns, and it regained the line without help.</li></ol></div></div>
+<div class="hero-fig"><figure class="fig"><a class="fplate plate " href="../assets/img/line-follower/hero-full.jpg" data-fig data-n="FIG. 01" data-cap="Assembled three-wheel robot with three IR sensors." data-cls=""><img src="../assets/img/line-follower/hero-full.jpg" width="1280" height="960" style="--nw:1280" alt="Assembled three-wheel robot with three IR sensors." decoding="async"></a>
+  <figcaption><span class="fn">FIG. 01</span><span>Assembled three-wheel robot with three IR sensors.</span></figcaption></figure></div></div></section>
 <section class="prow" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Design, assemble and program a three-wheel line-following robot from an Arduino robotics kit, including chassis, wiring, soldering and code.</p></div></section>
 <section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Acrylic chassis with two rubber-tyred DC motors, a front caster wheel and three IR sensors mounted at the front with hot glue.</li><li>Sensors read on digital pins, with an L298N motor driver on PWM pins 5, 6, 9 and 10 and power from three 4 V cells through a switch, with a common ground.</li><li>Control logic adjusts motor speeds differentially to correct direction from the three sensor readings.</li></ol></div></section>
-<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p>The robot followed the predefined black line with minimal deviation on straight sections. On curves, differential motor speed corrected the path, with minor oscillations at sharp turns, and it regained the line on its own. No overheating or significant voltage drop was observed.</p></div></section>
+<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p class="ptext">The robot followed the predefined black line with minimal deviation on straight sections. On curves, differential motor speed corrected the path, with minor oscillations at sharp turns, and it regained the line on its own. No overheating or significant voltage drop was observed.</p></div></section>
 <section class="prow" aria-labelledby="h-limitations"><h2 id="h-limitations">Limitations</h2><div class="pbody"><ul class="bul"><li>No quantitative results such as speed, lap time or accuracy are reported.</li><li>Basic kit-based project.</li></ul></div></section>
 <section class="prow" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2><div class="pbody"><ul class="tools"><li>Arduino Uno</li><li>L298N</li><li>IR sensors</li></ul></div></section>
 </div>
 
 <nav class="wrap pnav" aria-label="Projects">
-  <a class="pn prev" href="ann-regression.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span><span class="no">18</span> ANN Regression for Nanofluid Heat Transfer Coefficient</span></a>
-  <a class="all" href="../index.html#work">All work</a>
-  <a class="pn next" href="accelerometer.html"><span class="mono">Next</span><span class="pn-t"><span class="no">20</span> Mechanical Accelerometer MATLAB Simulation <span class="pn-a" aria-hidden="true">&rarr;</span></span></a>
+  <div class="pnav-row">
+    <div class="pos-wrap"><p class="pos-n">19<small>/ 20</small></p><p><a class="all lnk" href="../index.html#index">All work</a></p></div>
+    <a class="pn prev" href="ann-regression.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span> <span class="mono">18</span> ANN Regression for Nanofluid Heat Transfer Coefficient</span></a>
+    <a class="pn next" href="accelerometer.html"><div class="plate fit-contain is-chart"><img src="../assets/img/accelerometer/hero.jpg" width="800" height="582" style="--nw:800;--op:50% 50%" alt="" loading="lazy" decoding="async"><span class="crop" aria-hidden="true"></span></div><span class="pn-txt"><span class="mono">Next</span><span class="pn-t"><span class="mono">20</span> Mechanical Accelerometer MATLAB Simulation <span class="pn-a" aria-hidden="true">&rarr;</span></span></span></a>
+  </div>
 </nav>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <p>Marig Shabbir Ansari</p>
-    <p class="mono">Mechanical Engineer</p>
-    <a href="../index.html#top">Back to top</a>
+  <div class="wrap">
+    <div class="tb">
+      <div><span class="k">Name</span><span class="v">Marig Shabbir Ansari</span></div>
+      <div><span class="k">Role</span><span class="v">Mechanical Engineer</span></div>
+      <div><span class="k">Sheet</span><span class="v sheetno">SHEET 1 OF 1</span></div>
+      <div><span class="k">Year</span><span class="v">2026</span></div>
+      <div><span class="k">Page</span><a class="v lnk" href="../index.html#top">Back to top</a></div>
+    </div>
   </div>
 </footer>
 <script src="../assets/js/site.js" defer></script>

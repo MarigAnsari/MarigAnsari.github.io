@@ -7,63 +7,67 @@
 <meta name="description" content="MATLAB simulation of a spring-mass mechanical accelerometer that shows how mass deflection responds to acceleration.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314161a'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23ff7b3a' stroke-width='2'/%3E%3C/svg%3E">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body class="sub">
 <a class="skip" href="#main">Skip to content</a>
+<div class="frame" aria-hidden="true"><ol><li data-z="A">A</li><li data-z="B" class=on>B</li><li data-z="C">C</li><li data-z="D">D</li><li data-z="E">E</li><li data-z="F">F</li><li data-z="G">G</li><li data-z="H">H</li></ol></div>
 <header class="bar">
   <div class="wrap bar-in">
     <a class="mark" href="../index.html#top">Marig Shabbir Ansari</a>
-    <nav aria-label="Primary">
-      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+    <p class="zread" aria-hidden="true"><span class="zk">Zone</span><span class="zl" data-zl>B</span><span class="zn" data-zn>Work</span></p>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+    <nav id="site-nav" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#index">Index</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+      <div class="theme" role="group" aria-label="Theme" hidden><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
     </nav>
   </div>
+  <div class="cols" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+  <span class="progress" aria-hidden="true"></span>
 </header>
 <main id="main">
 <div class="wrap phead">
-  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span> Work</a></p>
+  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span>&nbsp;Work</a></p>
   <div class="sheet psheet">
-    <div class="cell pnum" aria-hidden="true"><span>20</span></div>
+    <div class="cell pnum" aria-hidden="true"><span class="big-num">20</span><span class="of">/ 20</span></div>
     <div class="cell ptitle"><h1>Mechanical Accelerometer MATLAB Simulation</h1></div>
     <dl class="pmeta"><div class="cell pm wide"><dt>Domain</dt><dd>Dynamics simulation</dd></div><div class="cell pm half l"><dt>Year</dt><dd>2024</dd></div><div class="cell pm half"><dt>Team</dt><dd>Team of 4</dd></div><div class="cell pm wide"><dt>Course</dt><dd>ME-212 Dynamics</dd></div></dl>
   </div>
 </div>
 
-<section class="wrap psum" aria-label="Summary">
-  <div class="summary">
-    <div class="srow"><h2>What</h2><p>MATLAB simulation of a spring-mass mechanical accelerometer that shows how mass deflection responds to acceleration.</p></div>
-    <div class="srow"><h2>Role</h2><p>Derived a spring-mass model from Hooke&#x27;s law and Newton&#x27;s second law and simulated deflection over plus and minus 2 g in MATLAB, in a team of 4.</p></div>
-    <div class="srow"><h2>Results</h2><ol class="sres"><li>Spring-mass model simulated over plus and minus 2 g, minus 19.6 to 19.6 m/s2, with 100 points.</li><li>Deflection is linear in acceleration.</li><li>The slope, or sensitivity, rises with mass and falls with spring constant.</li></ol></div>
-  </div>
-  <div class="hero-fig"><figure class="fig">
-  <a class="fplate" href="../assets/img/accelerometer/hero-full.jpg" target="_blank" rel="noopener"><img src="../assets/img/accelerometer/hero-full.jpg" width="1245" height="905" style="--nw:1245" alt="MATLAB deflection against acceleration, linear over plus and minus 2 g." decoding="async"></a>
-  <figcaption>MATLAB deflection against acceleration, linear over plus and minus 2 g.</figcaption>
-</figure></div>
-</section>
-
 <div class="wrap pdetail">
+<section class="prow" aria-labelledby="h-summary"><h2 id="h-summary">Summary</h2><div class="pbody"><div class="srows"><div class="sr-row"><h3>What</h3><p>MATLAB simulation of a spring-mass mechanical accelerometer that shows how mass deflection responds to acceleration.</p></div><div class="sr-row"><h3>Role</h3><p>Derived a spring-mass model from Hooke&#x27;s law and Newton&#x27;s second law and simulated deflection over plus and minus 2 g in MATLAB, in a team of 4.</p></div><div class="sr-row"><h3>Results</h3><ol class="sres"><li>Spring-mass model simulated over plus and minus 2 g, minus 19.6 to 19.6 m/s2, with 100 points.</li><li>Deflection is linear in acceleration.</li><li>The slope, or sensitivity, rises with mass and falls with spring constant.</li></ol></div></div>
+<div class="hero-fig"><figure class="fig"><a class="fplate plate is-chart" href="../assets/img/accelerometer/hero-full.jpg" data-fig data-n="FIG. 01" data-cap="MATLAB deflection against acceleration, linear over plus and minus 2 g." data-cls="is-chart"><img src="../assets/img/accelerometer/hero-full.jpg" width="1245" height="905" style="--nw:1245" alt="MATLAB deflection against acceleration, linear over plus and minus 2 g." decoding="async"></a>
+  <figcaption><span class="fn">FIG. 01</span><span>MATLAB deflection against acceleration, linear over plus and minus 2 g.</span></figcaption></figure></div></div></section>
 <section class="prow" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Design a mechanical accelerometer for measuring acceleration in the range of 2 g and show its response in MATLAB.</p></div></section>
 <section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Combined Hooke&#x27;s law and Newton&#x27;s second law for a mass on a spring.</li><li>MATLAB code computes deflection for 100 linearly spaced accelerations from minus 2 g to 2 g.</li><li>Discussed the effect of mass, spring constant and damping on sensitivity and response.</li></ol></div></section>
-<section class="prow" aria-labelledby="h-equations"><h2 id="h-equations">Equations</h2><div class="pbody"><ol class="eqs"><li><code>F = m a = -k x</code></li><li><code>x = -m a / k</code></li></ol></div></section>
-<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p>Deflection against acceleration is a straight line over minus 19.6 to 19.6 m/s2. A higher mass or a lower spring constant gives a steeper slope and greater sensitivity.</p></div></section>
+<section class="prow" aria-labelledby="h-equations"><h2 id="h-equations">Equations</h2><div class="pbody"><ol class="eqs"><li class="eq"><span class="eq-n">EQ. 1</span><code>F = m a = -k x</code></li><li class="eq"><span class="eq-n">EQ. 2</span><code>x = -m a / k</code></li></ol></div></section>
+<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p class="ptext">Deflection against acceleration is a straight line over minus 19.6 to 19.6 m/s2. A higher mass or a lower spring constant gives a steeper slope and greater sensitivity.</p></div></section>
 <section class="prow" aria-labelledby="h-limitations"><h2 id="h-limitations">Limitations</h2><div class="pbody"><ul class="bul"><li>Linear model only. Non-linear effects and damping are not modelled.</li><li>No experimental validation. A physical prototype is future work.</li><li>The mass and spring constant values are not given in the report text.</li></ul></div></section>
 <section class="prow" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2><div class="pbody"><ul class="tools"><li>MATLAB</li></ul></div></section>
 </div>
 
 <nav class="wrap pnav" aria-label="Projects">
-  <a class="pn prev" href="line-follower.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span><span class="no">19</span> Arduino Line Following Robot</span></a>
-  <a class="all" href="../index.html#work">All work</a>
-  <span class="pn empty"></span>
+  <div class="pnav-row">
+    <div class="pos-wrap"><p class="pos-n">20<small>/ 20</small></p><p><a class="all lnk" href="../index.html#index">All work</a></p></div>
+    <a class="pn prev" href="line-follower.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span> <span class="mono">19</span> Arduino Line Following Robot</span></a>
+    <span class="pn next empty"></span>
+  </div>
 </nav>
 </main>
 <footer class="foot">
-  <div class="wrap foot-in">
-    <p>Marig Shabbir Ansari</p>
-    <p class="mono">Mechanical Engineer</p>
-    <a href="../index.html#top">Back to top</a>
+  <div class="wrap">
+    <div class="tb">
+      <div><span class="k">Name</span><span class="v">Marig Shabbir Ansari</span></div>
+      <div><span class="k">Role</span><span class="v">Mechanical Engineer</span></div>
+      <div><span class="k">Sheet</span><span class="v sheetno">SHEET 1 OF 1</span></div>
+      <div><span class="k">Year</span><span class="v">2026</span></div>
+      <div><span class="k">Page</span><a class="v lnk" href="../index.html#top">Back to top</a></div>
+    </div>
   </div>
 </footer>
 <script src="../assets/js/site.js" defer></script>
