@@ -88,15 +88,29 @@
     var list = $('.index'); if (!list) return;
     var rows = $$('.irow', list), bar = $('.filters'), count = $('.icount');
     if (bar) {
-      var chips = $$('.fchip', bar);
-      function apply(key) {
-        var n = 0;
-        rows.forEach(function (r) { var on = key === 'all' || r.getAttribute('data-g') === key; if (on) n++; if (on) r.removeAttribute('data-dim'); else r.setAttribute('data-dim', '1'); });
+      var chips = $$('.fchip', bar), more = $('.more'), box = $('.index-more'), label = more && $('.more-t', more);
+      var key = 'all', expanded = false, hiddenN = box ? $$('.irow', box).length : 0, total = rows.length, tail = total - hiddenN;
+      if (box) $$('.irow', box).forEach(function (r) { r.classList.remove('rv', 'in'); });
+      // filter: only matching rows are shown (hidden, not dimmed); the featured-eight limit is lifted while filtering
+      function render(instant) {
+        var filtered = key !== 'all', n = 0;
+        if (instant) list.classList.add('instant');
+        rows.forEach(function (r) { var on = !filtered || r.getAttribute('data-g') === key; r.hidden = !on; if (on) n++; });
+        if (box) box.classList.toggle('is-collapsed', !filtered && !expanded);
+        if (more) { more.hidden = filtered; more.setAttribute('aria-expanded', String(expanded)); label.textContent = expanded ? 'Show fewer' : 'Show all ' + total + ' projects'; }
         chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-g') === key)); });
-        if (count) count.textContent = ('0' + n).slice(-2) + ' / ' + ('0' + rows.length).slice(-2);
+        if (!filtered && !expanded) n = tail;
+        if (count) count.textContent = ('0' + n).slice(-2) + ' / ' + ('0' + total).slice(-2);
+        if (instant) { void list.offsetHeight; list.classList.remove('instant'); }
       }
-      chips.forEach(function (c) { c.addEventListener('click', function () { apply(c.getAttribute('data-g')); }); });
-      bar.hidden = false; apply('all');
+      chips.forEach(function (c) { c.addEventListener('click', function () { key = c.getAttribute('data-g'); render(true); }); });
+      if (more) more.addEventListener('click', function () {
+        if (!expanded) { expanded = true; render(false); return; }
+        // collapse at once and keep the button where it was under the pointer, so the page does not jump
+        var y0 = more.getBoundingClientRect().top; expanded = false; render(true);
+        window.scrollTo({ top: window.scrollY + (more.getBoundingClientRect().top - y0), behavior: 'instant' });
+      });
+      bar.hidden = false; render(true);
     }
     if (!window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     var pv = document.createElement('div'); pv.className = 'pv'; pv.setAttribute('aria-hidden', 'true');
