@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finite Element Analysis of an Axial Compressor Rotor Blade | Marig Shabbir Ansari</title>
+<meta name="description" content="Coupled thermal, structural, modal and harmonic response analysis of a titanium axial compressor rotor blade in ANSYS Workbench.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314161a'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23ff7b3a' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body class="sub">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="mark" href="../index.html#top">Marig Shabbir Ansari</a>
+    <nav aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap phead">
+  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span> Work</a></p>
+  <div class="sheet psheet">
+    <div class="cell pnum" aria-hidden="true"><span>03</span></div>
+    <div class="cell ptitle"><h1>Finite Element Analysis of an Axial Compressor Rotor Blade</h1></div>
+    <dl class="pmeta"><div class="cell pm wide"><dt>Domain</dt><dd>Thermo-structural FEA</dd></div><div class="cell pm half l"><dt>Year</dt><dd>2026</dd></div><div class="cell pm half"><dt>Team</dt><dd>Team of 5</dd></div><div class="cell pm wide"><dt>Course</dt><dd>ME-467 Finite Element Analysis</dd></div></dl>
+  </div>
+</div>
+
+<section class="wrap psum" aria-label="Summary">
+  <div class="summary">
+    <div class="srow"><h2>What</h2><p>Coupled thermal, structural, modal and harmonic response analysis of a titanium axial compressor rotor blade in ANSYS Workbench.</p></div>
+    <div class="srow"><h2>Role</h2><p>Set up and ran the thermal, structural, modal and harmonic analyses of a titanium compressor blade in ANSYS Workbench, in a team of 5.</p></div>
+    <div class="srow"><h2>Results</h2><ol class="sres"><li>Peak von Mises stress of 424.91 MPa at the root fillet, with about 2.85 mm maximum deformation near the tip.</li><li>First natural frequency of 472.13 Hz, with six modes up to 7303.5 Hz.</li><li>Harmonic response peaks near 472 Hz.</li></ol></div>
+  </div>
+  <div class="hero-fig"><figure class="fig">
+  <a class="fplate" href="../assets/img/compressor-fea/hero.jpg" target="_blank" rel="noopener"><img src="../assets/img/compressor-fea/hero.jpg" width="802" height="412" style="--nw:802" alt="Equivalent (von Mises) stress distribution in the rotor blade." decoding="async"></a>
+  <figcaption>Equivalent (von Mises) stress distribution in the rotor blade.</figcaption>
+</figure></div>
+</section>
+
+<div class="wrap pdetail">
+<section class="prow" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Compressor blades carry centrifugal load, thermal gradients and pressure at the same time, and failures tend to start at the root. The study checks stress, deformation and resonance of a titanium blade under combined loading at 1000 rpm.</p></div></section>
+<section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Imported and cleaned the 3D blade geometry in ANSYS Workbench. Titanium alloy properties: Young&#x27;s modulus 110 GPa, Poisson ratio 0.34, density 4430 kg/m3, thermal conductivity 6.7 W/m K, specific heat 560 J/kg K and thermal expansion 8.6e-6 per °C.</li><li>Meshed with tetrahedral elements at a uniform 1 mm size.</li><li>Steady-state thermal analysis with 225 °C at the leading edge and 275 °C at the trailing edge.</li><li>One-way thermal to structural coupling: static structural analysis with the imported temperature field, 1000 rpm rotation, 0.2 MPa pressure on one surface, a fixed support at the root and extra displacement constraints to stop rigid body motion.</li><li>Prestressed modal analysis including rotation and thermal load.</li><li>Harmonic response analysis with a frequency sweep from 422 to 522 Hz around the first mode.</li></ol></div></section>
+<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p>Temperature rises smoothly from the leading edge toward the trailing edge. Maximum total deformation is about 2.85 mm near the tip. Maximum equivalent (von Mises) stress is about 424.91 MPa at the root and fillet. The report places this below the yield strength of titanium alloys such as Ti-6Al-4V and gives no numeric margin. Natural frequencies are 472.13, 1922.1, 2699.1, 3924.9, 5726.8 and 7303.5 Hz, and the first is the fundamental bending mode. The harmonic response shows a clear resonance peak near 472 Hz with a rapid phase change.</p></div></section>
+<section class="prow" aria-labelledby="h-validation"><h2 id="h-validation">Validation</h2><div class="pbody"><p>Results were compared with trends in published literature, for example stress concentration at the root.</p></div></section>
+<section class="prow" aria-labelledby="h-limitations"><h2 id="h-limitations">Limitations</h2><div class="pbody"><ul class="bul"><li>No mesh convergence study. One uniform 1 mm tetrahedral mesh.</li><li>No experimental validation.</li><li>One-way coupling, steady-state thermal analysis only and a single set of material properties.</li><li>The aerodynamic load is a uniform 0.2 MPa on one surface and is not a CFD result.</li><li>Fatigue life, transient thermal analysis and CFD-coupled loading are future work.</li></ul></div></section>
+<section class="prow" aria-labelledby="h-figures"><h2 id="h-figures">Figures</h2><div class="pbody"><div class="figs"><figure class="fig">
+  <a class="fplate" href="../assets/img/compressor-fea/fig1.jpg" target="_blank" rel="noopener"><img src="../assets/img/compressor-fea/fig1.jpg" width="1320" height="494" style="--nw:1320" alt="Steady-state temperature distribution across the rotor blade." decoding="async" loading="lazy"></a>
+  <figcaption>Steady-state temperature distribution across the rotor blade.</figcaption>
+</figure><figure class="fig">
+  <a class="fplate" href="../assets/img/compressor-fea/fig2.jpg" target="_blank" rel="noopener"><img src="../assets/img/compressor-fea/fig2.jpg" width="1320" height="497" style="--nw:1320" alt="Total deformation of the rotor blade under thermo-mechanical loading." decoding="async" loading="lazy"></a>
+  <figcaption>Total deformation of the rotor blade under thermo-mechanical loading.</figcaption>
+</figure><figure class="fig">
+  <a class="fplate" href="../assets/img/compressor-fea/fig4.jpg" target="_blank" rel="noopener"><img src="../assets/img/compressor-fea/fig4.jpg" width="1002" height="252" style="--nw:1002" alt="Natural frequencies of the blade from modal analysis." decoding="async" loading="lazy"></a>
+  <figcaption>Natural frequencies of the blade from modal analysis.</figcaption>
+</figure><figure class="fig">
+  <a class="fplate" href="../assets/img/compressor-fea/fig3.jpg" target="_blank" rel="noopener"><img src="../assets/img/compressor-fea/fig3.jpg" width="1421" height="542" style="--nw:1421" alt="Harmonic response of the blade, amplitude and phase against frequency." decoding="async" loading="lazy"></a>
+  <figcaption>Harmonic response of the blade, amplitude and phase against frequency.</figcaption>
+</figure></div></div></section>
+<section class="prow" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2><div class="pbody"><ul class="tools"><li>ANSYS Workbench</li></ul></div></section>
+</div>
+
+<nav class="wrap pnav" aria-label="Projects">
+  <a class="pn prev" href="orc.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span><span class="no">02</span> Organic Rankine Cycle for Remote Geothermal Heat Sources</span></a>
+  <a class="all" href="../index.html#work">All work</a>
+  <a class="pn next" href="ros-grasping.html"><span class="mono">Next</span><span class="pn-t"><span class="no">04</span> Real-Time Object Detection and Autonomous Grasping with ROS and YOLOv8 <span class="pn-a" aria-hidden="true">&rarr;</span></span></a>
+</nav>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p>Marig Shabbir Ansari</p>
+    <p class="mono">Mechanical Engineer</p>
+    <a href="../index.html#top">Back to top</a>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statically Indeterminate Shaft Design | Marig Shabbir Ansari</title>
+<meta name="description" content="Statically indeterminate shaft under torsion, designed by hand calculation and three diameter iterations, then checked in ANSYS.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314161a'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23ff7b3a' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body class="sub">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="mark" href="../index.html#top">Marig Shabbir Ansari</a>
+    <nav aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap phead">
+  <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span> Work</a></p>
+  <div class="sheet psheet">
+    <div class="cell pnum" aria-hidden="true"><span>15</span></div>
+    <div class="cell ptitle"><h1>Statically Indeterminate Shaft Design</h1></div>
+    <dl class="pmeta"><div class="cell pm wide"><dt>Domain</dt><dd>Machine element design</dd></div><div class="cell pm half l"><dt>Year</dt><dd>2024</dd></div><div class="cell pm half"><dt>Team</dt><dd>Team of 2</dd></div><div class="cell pm wide"><dt>Course</dt><dd>ME-213 Mechanics of Solids</dd></div></dl>
+  </div>
+</div>
+
+<section class="wrap psum" aria-label="Summary">
+  <div class="summary">
+    <div class="srow"><h2>What</h2><p>Statically indeterminate shaft under torsion, designed by hand calculation and three diameter iterations, then checked in ANSYS.</p></div>
+    <div class="srow"><h2>Role</h2><p>Solved the end reactions of a fixed-fixed shaft by hand, iterated three diameter pairs and checked the final design in ANSYS, in a team of 2.</p></div>
+    <div class="srow"><h2>Results</h2><ol class="sres"><li>Final design of 56 mm outer and 28 mm inner diameter gives a factor of safety of 2.0086.</li><li>ANSYS matched the hand calculation within about 1 percent, with shear stress of 34.9 against 34.85 MPa.</li><li>The 2.5 to 3.5 degree twist requirement could not be met together with the factor of safety, so the design kept the factor of safety (2.0086) at 1.27 degrees.</li></ol></div>
+  </div>
+  <div class="hero-fig"><figure class="fig">
+  <a class="fplate" href="../assets/img/shaft-design/hero.jpg" target="_blank" rel="noopener"><img src="../assets/img/shaft-design/hero.jpg" width="703" height="333" style="--nw:703" alt="ANSYS shear stress plot of the stepped shaft, maximum 34.9 MPa." decoding="async"></a>
+  <figcaption>ANSYS shear stress plot of the stepped shaft, maximum 34.9 MPa.</figcaption>
+</figure></div>
+</section>
+
+<div class="wrap pdetail">
+<section class="prow" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>A 1 m shaft fixed at both ends carries torques of 2283 N.m at C and 2049 N.m at E. The solid section AD and hollow section DB need whole-number diameters, a factor of safety above 2 on an ultimate shear stress of 70 MPa, and a twist of section CE between 2.5 and 3.5 degrees, with G = 26 GPa.</p></div></section>
+<section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Used the total torque balance plus zero total twist (both ends fixed) to solve the end reactions.</li><li>Wrote the section torques, then the twist of section CE and the maximum shear stress as functions of the radius c.</li><li>Ran three iterations with the inner diameter at half the outer diameter: 28/14 mm, 44/22 mm and 56/28 mm.</li><li>Checked the result in ANSYS with a shaft of 5 nodes, ends fixed and torques applied at nodes 2 and 4, comparing reactions, shear stress and twist with the hand values.</li></ol></div></section>
+<section class="prow" aria-labelledby="h-equations"><h2 id="h-equations">Equations</h2><div class="pbody"><ol class="eqs"><li><code>TA - TB = 234 N.m, from the torque balance TA - TC + TE - TB = 0</code></li><li><code>phi = sum(T L / (J G)), with phi_AB = 0 for fixed ends</code></li><li><code>J_solid = (pi/2) c^4; J_hollow = (pi/2)(c_outer^4 - c_inner^4)</code></li><li><code>tau = T c / J; FoS = tau_allowable / tau_max</code></li><li><code>phi_CE = 1.368e-8 / c^4 (rad, c in m); tau_max = 765.145 / c^3 (Pa, c in m)</code></li></ol></div></section>
+<section class="prow" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p>The end reactions are TA = 1201.887 N.m and TB = 967.887 N.m. The 28/14 mm iteration twists 20.4 degrees with a maximum shear stress of 278.8 MPa and a factor of safety of 0.25. The 44/22 mm iteration twists 3.346 degrees, in range, with 71.86 MPa and a factor of safety of 0.974. The final 56/28 mm design twists 1.27 degrees with 34.85 MPa and a factor of safety of 2.0086. ANSYS gives reactions of 1201.9 and 967.89 N.m, a maximum shear stress of 34.9 MPa and a twist of 1.277 degrees.</p></div></section>
+<section class="prow" aria-labelledby="h-validation"><h2 id="h-validation">Validation</h2><div class="pbody"><p>ANSYS agrees with the hand calculation to within 0.001 and 0.0003 percent on the reactions, 0.14 percent on shear stress and 0.55 percent on twist.</p></div></section>
+<section class="prow" aria-labelledby="h-limitations"><h2 id="h-limitations">Limitations</h2><div class="pbody"><ul class="bul"><li>The 2.5 to 3.5 degree twist requirement could not be met together with the factor of safety. The design kept the factor of safety (2.0086) at 1.27 degrees, and the 44/22 mm iteration that met the twist range had a factor of safety of only 0.974.</li><li>Only three whole-number diameter pairs were tried, all with the inner diameter at half the outer.</li><li>Assumes a linear elastic, homogeneous material.</li></ul></div></section>
+<section class="prow" aria-labelledby="h-figures"><h2 id="h-figures">Figures</h2><div class="pbody"><div class="figs"><figure class="fig">
+  <a class="fplate" href="../assets/img/shaft-design/fig1.jpg" target="_blank" rel="noopener"><img src="../assets/img/shaft-design/fig1.jpg" width="1178" height="582" style="--nw:1178" alt="ANSYS rotation plot used to find the angle of twist." decoding="async" loading="lazy"></a>
+  <figcaption>ANSYS rotation plot used to find the angle of twist.</figcaption>
+</figure><figure class="fig">
+  <a class="fplate" href="../assets/img/shaft-design/fig2.jpg" target="_blank" rel="noopener"><img src="../assets/img/shaft-design/fig2.jpg" width="1600" height="782" style="--nw:1600" alt="Engineering drawing of the final shaft design." decoding="async" loading="lazy"></a>
+  <figcaption>Engineering drawing of the final shaft design.</figcaption>
+</figure></div></div></section>
+<section class="prow" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2><div class="pbody"><ul class="tools"><li>ANSYS</li><li>Hand calculation</li></ul></div></section>
+</div>
+
+<nav class="wrap pnav" aria-label="Projects">
+  <a class="pn prev" href="tailplane-pid.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span><span class="no">14</span> Closed-Loop PID Analysis of a 2-DOF Tailplane</span></a>
+  <a class="all" href="../index.html#work">All work</a>
+  <a class="pn next" href="dc-motor.html"><span class="mono">Next</span><span class="pn-t"><span class="no">16</span> DC Motor Speed Control Without Encoder <span class="pn-a" aria-hidden="true">&rarr;</span></span></a>
+</nav>
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p>Marig Shabbir Ansari</p>
+    <p class="mono">Mechanical Engineer</p>
+    <a href="../index.html#top">Back to top</a>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
