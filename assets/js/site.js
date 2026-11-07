@@ -83,7 +83,7 @@
     items.forEach(function (el) { io.observe(el); });
   })();
 
-  /* index filter and hover preview */
+  /* index filter, show more / fewer */
   (function () {
     var list = $('.index'); if (!list) return;
     var rows = $$('.irow', list), bar = $('.filters'), count = $('.icount');
@@ -112,33 +112,36 @@
       });
       bar.hidden = false; render(true);
     }
-    if (!window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var pv = document.createElement('div'); pv.className = 'pv'; pv.setAttribute('aria-hidden', 'true');
-    pv.innerHTML = '<div class="plate"></div>'; document.body.appendChild(pv);
-    var plate = pv.firstChild, img = null, x = 0, y = 0, pending = false, warmed = false;
-    function place() {
-      pending = false;
-      var w = 264, h = 192, px = x + 30, py = y + 26;
-      if (px + w > window.innerWidth - 12) px = x - w - 30;
-      if (py + h > window.innerHeight - 12) py = window.innerHeight - h - 12;
-      pv.style.transform = 'translate3d(' + Math.max(8, px) + 'px,' + Math.max(8, py) + 'px,0)';
-    }
-    list.addEventListener('mouseenter', function () {
-      if (warmed) return; warmed = true;
-      rows.forEach(function (r) { var t = $('img', r); if (t) { var p = new Image(); p.src = t.currentSrc || t.src; } });
-    });
-    rows.forEach(function (r) {
-      r.addEventListener('mouseenter', function (e) {
-        var t = $('img', r); if (!t) return;
-        plate.className = 'plate ' + r.getAttribute('data-cls');
-        if (!img) { img = new Image(); img.alt = ''; plate.appendChild(img); }
-        img.setAttribute('style', t.getAttribute('style') || ''); img.src = t.currentSrc || t.src;
-        x = e.clientX; y = e.clientY; place(); pv.classList.add('on');
+  })();
+
+  /* hero: one-time count-up of the stat numerals. The final value is in the HTML and in a hidden span for readers. */
+  (function () {
+    var els = $$('.cu [data-to]'); if (!els.length || reduce) return;
+    function run() {
+      els.forEach(function (el) {
+        var to = +el.getAttribute('data-to'), t0 = null; el.textContent = '0';
+        (function step(now) {
+          if (t0 === null) t0 = now; var p = Math.min(1, (now - t0) / 900);
+          el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
       });
-      r.addEventListener('mousemove', function (e) { x = e.clientX; y = e.clientY; if (!pending) { pending = true; requestAnimationFrame(place); } });
-      r.addEventListener('mouseleave', function () { pv.classList.remove('on'); });
-    });
-    window.addEventListener('scroll', function () { pv.classList.remove('on'); }, { passive: true });
+    }
+    var hero = $('.sheet'); if (!hero || !('IntersectionObserver' in window)) { run(); return; }
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: 0.3 }); io.observe(hero);
+  })();
+
+  /* hero Klann figure: plots itself once, the first time it is on screen, then rests */
+  (function () {
+    var k = $('.klann'); if (!k) return;
+    var dot = $('.k-dot', k), am = $('#kam', k);
+    function go() {
+      k.classList.add('go');
+      // after the figure has plotted itself, one orange dot travels once round the foot path and rests
+      if (!reduce && dot && am && am.beginElement) setTimeout(function () { dot.style.opacity = '1'; try { am.beginElement(); } catch (e) {} }, 2050);
+    }
+    if (!('IntersectionObserver' in window)) { go(); return; }
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { go(); io.disconnect(); } }, { threshold: 0.4 }); io.observe(k);
   })();
 
   /* copy buttons (email, phone, LinkedIn): copy the plain value, brief "Copied" state, polite announcement */
