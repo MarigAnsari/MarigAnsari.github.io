@@ -15,18 +15,16 @@
 </head>
 <body class="sub">
 <a class="skip" href="#main">Skip to content</a>
-<div class="frame" aria-hidden="true"><ol><li data-z="A">A</li><li data-z="B" class=on>B</li><li data-z="C">C</li><li data-z="D">D</li><li data-z="E">E</li><li data-z="F">F</li><li data-z="G">G</li><li data-z="H">H</li></ol></div>
 <header class="bar">
   <div class="wrap bar-in">
     <a class="mark" href="../index.html#top">Marig Shabbir Ansari</a>
     <p class="zread" aria-hidden="true"><span class="zk">Zone</span><span class="zl" data-zl>B</span><span class="zn" data-zn>Work</span></p>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
     <nav id="site-nav" aria-label="Primary">
-      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#index">Index</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
+      <a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#index">Index</a><a href="../index.html#experience">Experience</a><a href="../index.html#research">Research</a><a href="../index.html#skills">Skills</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a>
       <div class="theme" role="group" aria-label="Theme" hidden><button type="button" data-t="light" aria-pressed="false">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div>
     </nav>
   </div>
-  <div class="cols" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
   <span class="progress" aria-hidden="true"></span>
 </header>
 <main id="main">
@@ -41,7 +39,7 @@
 
 <div class="wrap pdetail">
 <section class="prow" aria-labelledby="h-summary"><h2 id="h-summary">Summary</h2><div class="pbody"><div class="srows"><div class="sr-row"><h3>What</h3><p>Coupled thermal, structural, modal and harmonic response analysis of a titanium axial compressor rotor blade in ANSYS Workbench.</p></div><div class="sr-row"><h3>Role</h3><p>Set up and ran the thermal, structural, modal and harmonic analyses of a titanium compressor blade in ANSYS Workbench, in a team of 5.</p></div><div class="sr-row"><h3>Results</h3><ol class="sres"><li>Peak von Mises stress of 424.91 MPa at the root fillet, with about 2.85 mm maximum deformation near the tip.</li><li>First natural frequency of 472.13 Hz, with six modes up to 7303.5 Hz.</li><li>Harmonic response peaks near 472 Hz.</li></ol></div></div>
-<div class="hero-fig"><figure class="fig"><a class="fplate plate " href="../assets/img/compressor-fea/hero.jpg" data-fig data-n="FIG. 01" data-cap="Equivalent (von Mises) stress distribution in the rotor blade." data-cls=""><img src="../assets/img/compressor-fea/hero.jpg" width="802" height="412" style="--nw:802" alt="Equivalent (von Mises) stress distribution in the rotor blade." decoding="async"></a>
+<div class="hero-fig"><figure class="fig"><a class="fplate plate is-chart" href="../assets/img/compressor-fea/hero.jpg" data-fig data-n="FIG. 01" data-cap="Equivalent (von Mises) stress distribution in the rotor blade." data-cls="is-chart"><img src="../assets/img/compressor-fea/hero.jpg" width="802" height="412" style="--nw:802" alt="Equivalent (von Mises) stress distribution in the rotor blade." decoding="async"></a>
   <figcaption><span class="fn">FIG. 01</span><span>Equivalent (von Mises) stress distribution in the rotor blade.</span></figcaption></figure></div></div></section>
 <section class="prow" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Compressor blades carry centrifugal load, thermal gradients and pressure at the same time, and failures tend to start at the root. The study checks stress, deformation and resonance of a titanium blade under combined loading at 1000 rpm.</p></div></section>
 <section class="prow" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Imported and cleaned the 3D blade geometry in ANSYS Workbench. Titanium alloy properties: Young&#x27;s modulus 110 GPa, Poisson ratio 0.34, density 4430 kg/m3, thermal conductivity 6.7 W/m K, specific heat 560 J/kg K and thermal expansion 8.6e-6 per °C.</li><li>Meshed with tetrahedral elements at a uniform 1 mm size.</li><li>Steady-state thermal analysis with 225 °C at the leading edge and 275 °C at the trailing edge.</li><li>One-way thermal to structural coupling: static structural analysis with the imported temperature field, 1000 rpm rotation, 0.2 MPa pressure on one surface, a fixed support at the root and extra displacement constraints to stop rigid body motion.</li><li>Prestressed modal analysis including rotation and thermal load.</li><li>Harmonic response analysis with a frequency sweep from 422 to 522 Hz around the first mode.</li></ol></div></section>
@@ -63,6 +61,7 @@
   </div>
 </nav>
 </main>
+<nav class="frame" aria-label="Zones"><ol><li><a href="../index.html#top" data-z="A" data-name="Intro" aria-label="Zone A, Intro">A</a></li><li><a href="../index.html#work" data-z="B" data-name="Work" aria-label="Zone B, Work" aria-current=true>B</a></li><li><a href="../index.html#index" data-z="C" data-name="Index" aria-label="Zone C, Index">C</a></li><li><a href="../index.html#experience" data-z="D" data-name="Experience" aria-label="Zone D, Experience">D</a></li><li><a href="../index.html#research" data-z="E" data-name="Research" aria-label="Zone E, Research">E</a></li><li><a href="../index.html#skills" data-z="F" data-name="Skills" aria-label="Zone F, Skills">F</a></li><li><a href="../index.html#education" data-z="G" data-name="Education" aria-label="Zone G, Education">G</a></li><li><a href="../index.html#about" data-z="H" data-name="About" aria-label="Zone H, About">H</a></li><li><a href="../index.html#contact" data-z="I" data-name="Contact" aria-label="Zone I, Contact">I</a></li></ol></nav>
 <footer class="foot">
   <div class="wrap">
     <div class="tb">

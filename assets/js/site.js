@@ -38,7 +38,7 @@
   (function () {
     var spies = $$('[data-spy]'); if (!spies.length) return;
     var links = {}; $$('.bar nav a').forEach(function (a) { var h = a.getAttribute('href'); if (h && h.indexOf('#') > -1) links[h.split('#')[1]] = a; });
-    var zl = $('[data-zl]'), zn = $('[data-zn]'), letters = $$('.frame li'), cur = null, curLink = null;
+    var zl = $('[data-zl]'), zn = $('[data-zn]'), letters = $$('.frame a'), cur = null, curLink = null;
     var bar = $('.progress'), css = window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()');
     var ticking = false;
     function update() {
@@ -51,7 +51,7 @@
         if (z) {
           if (zl) zl.textContent = z.getAttribute('data-zone');
           if (zn) zn.textContent = z.getAttribute('data-zname');
-          letters.forEach(function (li) { li.classList.toggle('on', li.getAttribute('data-z') === z.getAttribute('data-zone')); });
+          letters.forEach(function (a) { if (a.getAttribute('data-z') === z.getAttribute('data-zone')) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
         }
         if (curLink) curLink.removeAttribute('aria-current');
         curLink = active ? links[active.id] || null : null;
@@ -127,16 +127,33 @@
     window.addEventListener('scroll', function () { pv.classList.remove('on'); }, { passive: true });
   })();
 
-  /* copy email */
+  /* copy buttons (email, phone, LinkedIn): copy the plain value, brief "Copied" state, polite announcement */
   (function () {
-    var b = $('.copy'); if (!b || !navigator.clipboard) return;
-    var msg = $('[data-copy-msg]'), t;
-    b.hidden = false;
-    b.addEventListener('click', function () {
-      navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
-        b.textContent = 'Copied'; if (msg) msg.textContent = 'Email address copied';
-        clearTimeout(t); t = setTimeout(function () { b.textContent = 'Copy'; if (msg) msg.textContent = ''; }, 1800);
-      }, function () {});
+    if (!navigator.clipboard) return;
+    $$('.copy').forEach(function (b) {
+      var msg = $('[data-copy-msg]', b.parentNode), t;
+      b.hidden = false;
+      b.addEventListener('click', function () {
+        navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
+          b.textContent = 'Copied'; b.classList.add('is-done'); if (msg) msg.textContent = b.getAttribute('data-done') || 'Copied';
+          clearTimeout(t); t = setTimeout(function () { b.textContent = 'Copy'; b.classList.remove('is-done'); if (msg) msg.textContent = ''; }, 1800);
+        }, function () {});
+      });
+    });
+  })();
+
+  /* floating back-to-top: appears after about one viewport of scroll */
+  (function () {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop'; b.setAttribute('aria-label', 'Back to top');
+    b.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 15V3M3.5 8.5L9 3l5.5 5.5"/></svg>';
+    document.body.appendChild(b);
+    var on = false, ticking = false;
+    function update() { ticking = false; var s = window.scrollY > window.innerHeight; if (s !== on) { on = s; b.classList.toggle('on', s); } }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update); update();
+    b.addEventListener('click', function (e) {
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      if (e.detail === 0) { var m = $('.mark'); if (m) m.focus({ preventScroll: true }); }
     });
   })();
 
