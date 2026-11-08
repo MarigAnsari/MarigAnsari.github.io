@@ -288,16 +288,16 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 .sec.sec-work { --pt: 136px; }
 .sec.sec-compact { --pt: 0px; }
 @media (min-width: 900px) { .sec { --pt: 112px; } .sec.sec-work { --pt: 168px; } }
-.zhead { display: flex; align-items: baseline; gap: 0 20px; margin-bottom: 40px; }
+.zhead { display: flex; flex-wrap: wrap; justify-content: center; text-align: center; align-items: baseline; gap: 0 20px; margin-bottom: 40px; }
 .zmark { color: var(--accent); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; flex: none; width: 56px; }
 .zhead h2 { font-weight: 700; font-size: clamp(48px, 6vw, 84px); line-height: 0.95; letter-spacing: 0.015em; text-transform: uppercase; }
 .zhead.big h2 { font-weight: 800; font-size: clamp(56px, 7vw, 100px); }
-.zmeta { color: var(--muted); flex: none; margin-left: auto; }
+.zmeta { color: var(--muted); flex: none; width: 100%; margin: 12px 0 0; text-align: center; }
 @media (min-width: 900px) {
   .zhead { margin-bottom: 56px; gap: 0 24px; }
   .zmark { width: calc(var(--label) + 24px); }
 }
-@media (max-width: 899px) { .zmark { width: auto; } .zhead { gap: 0 14px; flex-wrap: wrap; } .zmeta { width: 100%; margin-top: 6px; margin-left: 0; } }
+@media (max-width: 899px) { .zmark { width: auto; } .zhead { gap: 0 14px; } .zmeta { margin-top: 6px; } }
 @media (max-width: 359px) { .zmark { width: 100%; margin-bottom: 6px; } }
 
 /* ---------- featured work ---------- */
@@ -372,6 +372,16 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 .fchip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .fchip[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
 @media (max-width: 899px) { .fchip { min-height: 44px; } }
+@media (max-width: 999px) {
+  .filters:not([hidden]) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fchip { justify-content: space-between; text-align: left; min-height: 44px; padding: 6px 12px; line-height: 1.25; }
+  .fchip[data-g="all"], .icount { grid-column: 1 / -1; }
+  .icount { margin-left: 0; justify-self: end; }
+}
+@media (min-width: 600px) and (max-width: 999px) {
+  .filters:not([hidden]) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fchip[data-g="all"] { grid-column: span 2; }
+}
 @media (hover: hover) { .fchip:hover:not([aria-pressed="true"]) { background: color-mix(in srgb, var(--ink) 8%, transparent); } }
 .icount { color: var(--muted); margin-left: auto; align-self: center; font: 500 12.5px var(--mono); font-variant-numeric: tabular-nums; }
 .ihead { display: none; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11.5px; }
@@ -463,6 +473,7 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
   .paper .status { justify-self: end; text-align: left; grid-column: 3; grid-row: 1; }
   .paper .paper-body { grid-column: 2; grid-row: 1; }
 }
+@media (max-width: 999px) { .pthumb { justify-self: center; } }
 
 /* ---------- skills + education band ---------- */
 .band { margin-top: 112px; background: var(--band); border-block: 1px solid var(--ink); padding-block: 72px 80px; position: relative; }
@@ -474,7 +485,14 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 .skgroup ul { padding: 8px 14px 12px; }
 .skgroup li { padding: 5px 0; font-size: 15px; line-height: 1.4; }
 @media (min-width: 720px) { .skills { columns: 2; } }
-@media (min-width: 1000px) { .skills { columns: 3; } }
+@media (min-width: 1000px) {
+  .skills { columns: auto; border-top: 1px solid var(--ink); }
+  .skgroup { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 32px; align-items: start; border: 0; border-bottom: 1px solid var(--rule); background: transparent; margin: 0; padding: 20px 0; }
+  .skgroup h3 { border: 0; padding: 5px 0; }
+  .skgroup ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; padding: 0; }
+  .skgroup li { padding: 5px 0; }
+}
+@media (min-width: 1240px) { .skgroup ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* ---------- about ---------- */
 .about-text { font-size: clamp(18px, 1.4vw, 20px); line-height: 1.6; max-width: 62ch; }
