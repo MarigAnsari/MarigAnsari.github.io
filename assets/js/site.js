@@ -131,17 +131,22 @@
     var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: 0.3 }); io.observe(hero);
   })();
 
-  /* hero Klann figure: plots itself once, the first time it is on screen, then rests */
+  /* hero Klann figure: plots itself once, then one orange dot circles the foot path (one lap every 7 s), paused when off screen or the tab is hidden */
   (function () {
     var k = $('.klann'); if (!k) return;
-    var dot = $('.k-dot', k), am = $('#kam', k);
-    function go() {
-      k.classList.add('go');
-      // after the figure has plotted itself, one orange dot travels once round the foot path and rests
-      if (!reduce && dot && am && am.beginElement) setTimeout(function () { dot.style.opacity = '1'; try { am.beginElement(); } catch (e) {} }, 2050);
-    }
-    if (!('IntersectionObserver' in window)) { go(); return; }
-    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { go(); io.disconnect(); } }, { threshold: 0.4 }); io.observe(k);
+    var dot = $('.k-dot', k), path = $('#kfp', k), hero = $('.sheet');
+    var LAP = 7000, len = 0, pos = 0, last = 0, raf = 0, running = false, ready = false, seen = true;
+    function put(f) { var p = path.getPointAtLength(f * len); dot.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ')'); }
+    function frame(now) { if (!running) return; pos = (pos + now - last) % LAP; last = now; put(pos / LAP); raf = requestAnimationFrame(frame); }
+    function play() { if (running || !ready || !seen || document.hidden || reduce) return; running = true; last = performance.now(); raf = requestAnimationFrame(frame); }
+    function pause() { running = false; cancelAnimationFrame(raf); }
+    function start() { if (!path || !dot) return; len = path.getTotalLength(); put(0); dot.style.opacity = '1'; ready = true; play(); }
+    function go() { k.classList.add('go'); if (reduce) start(); else setTimeout(start, 2100); }
+    if ('IntersectionObserver' in window) {
+      var once = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { go(); once.disconnect(); } }, { threshold: 0.2 }); once.observe(k);
+      if (hero) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; if (seen) play(); else pause(); }, { threshold: 0 }).observe(hero);
+    } else go();
+    document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); else play(); });
   })();
 
   /* copy buttons (email, phone, LinkedIn): copy the plain value, brief "Copied" state, polite announcement */
@@ -159,18 +164,34 @@
     });
   })();
 
-  /* floating back-to-top: appears after about one viewport of scroll */
+  /* floating two-way button: upper half of the page = bottom centre, points down, goes to the bottom;
+     lower half = top centre, points up, goes to the top. 45/55 percent hysteresis stops flicker at the midpoint. */
   (function () {
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop'; b.setAttribute('aria-label', 'Back to top');
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop on is-down';
     b.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 15V3M3.5 8.5L9 3l5.5 5.5"/></svg>';
     document.body.appendChild(b);
-    var on = false, ticking = false;
-    function update() { ticking = false; var s = window.scrollY > window.innerHeight; if (s !== on) { on = s; b.classList.toggle('on', s); } }
+    var down = true, ticking = false;
+    function apply() {
+      b.classList.toggle('is-down', down); b.classList.toggle('is-up', !down);
+      b.setAttribute('aria-label', down ? 'Go to bottom' : 'Back to top');
+    }
+    var bar = $('.bar');
+    function update() {
+      ticking = false;
+      if (bar) b.style.setProperty('--bar-b', bar.getBoundingClientRect().bottom + 'px');
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max <= 0) { b.classList.remove('on'); return; }
+      b.classList.add('on');
+      var p = window.scrollY / max;
+      if (down && p > 0.55) { down = false; apply(); } else if (!down && p < 0.45) { down = true; apply(); }
+    }
+    apply();
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     window.addEventListener('resize', update); update();
     b.addEventListener('click', function (e) {
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-      if (e.detail === 0) { var m = $('.mark'); if (m) m.focus({ preventScroll: true }); }
+      var toBottom = down;
+      window.scrollTo({ top: toBottom ? document.documentElement.scrollHeight : 0, behavior: reduce ? 'auto' : 'smooth' });
+      if (e.detail === 0 && !toBottom) { var m = $('.mark'); if (m) m.focus({ preventScroll: true }); }
     });
   })();
 

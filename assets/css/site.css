@@ -201,14 +201,20 @@ h1.name { font-size: clamp(60px, 17vw, 84px); line-height: 0.9; letter-spacing: 
 .c-photo { padding-bottom: 56px; border-top: 1px solid var(--ink); }
 .sheet > .c-photo { order: 9; }
 
-/* Klann linkage figure: a drafting-style strip under the stats. Decorative; plots itself once, then rests. */
-.sheet > .c-draw { order: 8; padding: 14px 0 0; border: 0; position: relative; display: block; text-decoration: none; color: var(--muted); overflow: hidden; transition: background-color 0.2s ease; }
-.c-draw svg { display: block; width: 100%; height: 196px; }
-.dl-b { display: flex; align-items: center; gap: 12px; padding: 0 16px; font: 500 11.5px var(--mono); letter-spacing: 0.1em; }
-.dl-r { flex: 1; height: 1px; background: var(--ink); opacity: 0.55; }
-.dl-n { font-variant-numeric: tabular-nums; }
-.c-draw:focus-visible { outline-offset: -4px; }
-@media (hover: hover) and (pointer: fine) { .c-draw:hover { background: color-mix(in srgb, var(--accent) 5%, transparent); } .c-draw:hover .dl-t { color: var(--ink); } }
+/* Klann linkage figure as a faint drafting layer behind the hero. Decorative; plots itself once, then an orange dot circles the foot path. */
+.sheet > .cell, .sheet > .stats, .sheet > .c-photo { position: relative; z-index: 1; }
+.hero-fig { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.hero-fig { --fi: color-mix(in srgb, var(--ink) 15%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 30%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 45%, var(--paper)); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero-fig { --fi: color-mix(in srgb, var(--ink) 22%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 38%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 52%, var(--paper)); } }
+:root[data-theme="dark"] .hero-fig { --fi: color-mix(in srgb, var(--ink) 22%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 38%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 52%, var(--paper)); }
+.hero-fig svg { position: absolute; right: 12px; bottom: 44px; height: 300px; width: auto; max-width: 100%; }
+.hero-fig .k-b, .hero-fig .k-p { stroke: var(--fi); stroke-width: 1.5; }
+.hero-fig .k-c, .hero-fig .k-ah { fill: var(--fi); }
+.hero-fig .k-g, .hero-fig .k-d, .hero-fig .k-rot { stroke: var(--fi); stroke-width: 1.2; }
+.hero-fig .k-tx { fill: var(--ft); font-size: 10px !important; }
+.hero-fig .k-f { stroke: var(--ff); stroke-width: 2; }
+.hero-fig .k-dot { fill: var(--accent); r: 3; }
+@media (max-width: 359px) { .hero-fig { display: none; } }
 .k-f { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 3; stroke-linecap: round; }
 .k-rot { fill: none; stroke: var(--ink); stroke-width: 0.8; stroke-dasharray: 3 3; }
 .k-b { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
@@ -225,7 +231,7 @@ h1.name { font-size: clamp(60px, 17vw, 84px); line-height: 0.9; letter-spacing: 
 @media (prefers-reduced-motion: no-preference) {
   html.js .klann .k-b { stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0; }
   html.js .klann .k-d, html.js .klann .k-tr { stroke-dasharray: 1; stroke-dashoffset: 1; }
-  html.js .klann .k-g, html.js .klann .k-rot, html.js .klann .k-p, html.js .klann .k-c, html.js .klann .k-t, html.js .klann .dl-b { opacity: 0; }
+  html.js .klann .k-g, html.js .klann .k-rot, html.js .klann .k-p, html.js .klann .k-c, html.js .klann .k-t { opacity: 0; }
   html.js .klann.go .k-b { animation: kdraw 0.34s cubic-bezier(0.77, 0, 0.175, 1) var(--d) forwards, kfill 0.2s ease-out calc(var(--d) + 0.26s) forwards; }
   html.js .klann.go .k-d { animation: kdraw 0.3s cubic-bezier(0.77, 0, 0.175, 1) var(--d) forwards; }
   html.js .klann.go .k-tr { animation: kdraw 0.9s cubic-bezier(0.45, 0, 0.55, 1) 1.05s forwards; }
@@ -233,26 +239,25 @@ h1.name { font-size: clamp(60px, 17vw, 84px); line-height: 0.9; letter-spacing: 
   html.js .klann.go .k-rot { animation: kfade 0.3s ease-out 0.5s forwards; }
   html.js .klann.go .k-p, html.js .klann.go .k-c { animation: kfade 0.25s ease-out 0.95s forwards; }
   html.js .klann.go .k-t { animation: kfade 0.25s ease-out var(--d, 1s) forwards; }
-  html.js .klann.go .dl-b { animation: kfade 0.3s ease-out 0.15s forwards; }
 }
 
 @media (min-width: 900px) {
   .hero { padding-top: 40px; }
   .sheet { grid-template-columns: repeat(12, 1fr); }
   .c-label { grid-column: 1 / 9; grid-row: 1; padding: 16px 28px; }
-  .c-name { grid-column: 1 / 9; grid-row: 2; padding: 38px 28px 26px; }
-  .c-intro { grid-column: 1 / 9; grid-row: 3; padding: 16px 28px; border-bottom: 1px solid var(--ink); }
-  .sheet > .c-photo { order: 0; grid-column: 9 / 13; grid-row: 1 / 4; border-top: 0; border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 30px 40px 50px; align-items: center; }
-  .detail { max-width: 244px; }
+  .c-name { grid-column: 1 / 9; grid-row: 2; padding: 56px 28px 40px; }
+  .c-intro { grid-column: 1 / 9; grid-row: 3; padding: 24px 28px; border-bottom: 1px solid var(--ink); }
+  .sheet > .c-photo { order: 0; grid-column: 9 / 13; grid-row: 1 / 4; border-top: 0; border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 40px 40px 56px; align-items: center; }
   .sheet > .stats { grid-column: 1 / 13; grid-row: 4; border-bottom: 0; }
-  .sheet > .c-draw { grid-column: 1 / 13; grid-row: 5; height: 240px; padding: 0; border-top: 1px solid var(--ink); }
-  .c-draw svg { position: absolute; left: 36%; top: 0; width: 64%; height: 100%; }
-  .dl-b { position: absolute; left: 28px; bottom: 24px; width: min(250px, 26%); flex-direction: column; align-items: stretch; gap: 9px; padding: 0; }
-  .dl-r { flex: none; opacity: 0.6; }
-  .sheet .stat { padding: 18px 28px 22px; gap: 8px; }
+  .sheet .stat { padding: 22px 28px 26px; gap: 8px; }
+  .hero-fig svg { right: 1.5%; top: -8.5%; bottom: auto; height: 80%; }
+  .hero-fig .k-b, .hero-fig .k-p { stroke-width: 0.9; }
+  .hero-fig .k-g, .hero-fig .k-d, .hero-fig .k-rot { stroke-width: 0.8; }
+  .hero-fig .k-tx { font-size: 7px !important; }
+  .hero-fig .k-f { stroke-width: 1.4; }
   .sheet .stat .val { font-size: clamp(52px, 5.4vw, 72px); }
   .sheet .stat .lab { font-size: 13px; line-height: 1.45; letter-spacing: 0.02em; }
-  h1.name { font-size: clamp(76px, 8.1vw, 118px); }
+  h1.name { font-size: clamp(76px, 9.6vw, 140px); }
 }
 
 /* ---------- zones (section heads) ---------- */
@@ -498,7 +503,10 @@ h1.name { font-size: clamp(60px, 17vw, 84px); line-height: 0.9; letter-spacing: 
   transition: opacity 140ms ease-out, transform 140ms ease-out, visibility 0s 140ms, background-color 0.15s ease, color 0.15s ease; }
 .totop.on { opacity: 1; visibility: visible; transform: none; transition: opacity 200ms var(--ease), transform 200ms var(--ease), visibility 0s, background-color 0.15s ease, color 0.15s ease; }
 .totop.on:active { transform: scale(0.94); transition-duration: 100ms; }
-.totop svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: square; }
+.totop svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: square; transition: transform 200ms var(--ease); }
+/* two-way: down mode sits bottom centre with the arrow flipped; up mode sits top centre under the sticky header */
+.totop.is-down svg { transform: rotate(180deg); }
+.totop.is-up { bottom: auto; top: calc(var(--bar-b, var(--head-h)) + 16px); }
 @media (hover: hover) and (pointer: fine) { .totop.on:hover { background: var(--ink); color: var(--paper); } }
 
 /* ---------- reveal (one time) ---------- */
