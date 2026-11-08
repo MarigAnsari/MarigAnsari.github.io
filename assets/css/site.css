@@ -422,7 +422,7 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 .rows { max-width: 68ch; }
 .rows li { border-top: 1px solid var(--rule); padding: 14px 0; }
 .rows li:first-child { border-top: 0; padding-top: 0; }
-.stats-3 { border: 1px solid var(--ink); margin-top: 40px; background: var(--paper); }
+.stats-3 { border: 1px solid var(--ink); margin-top: 12px; background: var(--paper); }
 .stats-3 .stat { padding: 18px 16px; }
 .stats-3 .val { font-size: clamp(40px, 4vw, 52px); }
 .exp-body { min-width: 0; }
@@ -496,7 +496,7 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 }
 
 /* ---------- about ---------- */
-.about-text { font-size: clamp(18px, 1.4vw, 20px); line-height: 1.6; max-width: 62ch; text-align: justify; hyphens: auto; text-wrap: pretty; }
+.about-text { font-size: clamp(18px, 1.4vw, 20px); line-height: 1.6; max-width: 62ch; text-align: justify; text-justify: inter-word; hyphens: manual; overflow-wrap: normal; word-break: normal; text-wrap: pretty; }
 .about-pic { display: flex; margin-top: 40px; padding-bottom: 40px; }
 .about-pic .detail { max-width: 230px; }
 @media (max-width: 899px) { .about-pic { justify-content: center; } }
@@ -513,7 +513,7 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 .contact > li { display: grid; grid-template-columns: var(--lw) minmax(0, 1fr) var(--cw); column-gap: 12px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
 .contact .k { font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .contact .acts { display: contents; }
-.contact .btn { width: 100%; min-width: 0; justify-content: flex-start; text-align: left; font-size: clamp(12.5px, 4vw, 15px); line-height: 1.25; padding: 10px clamp(9px, 3vw, 14px); }
+.contact .btn { width: 100%; min-width: 0; justify-content: center; text-align: center; font-size: clamp(12.5px, 4vw, 15px); line-height: 1.25; padding: 10px clamp(9px, 3vw, 14px); }
 .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 600; font-size: 17px; border: 1px solid var(--accent); overflow-wrap: anywhere; }
 @media (hover: hover) { .btn:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); } }
 .btn:active { transform: scale(0.97); }
@@ -732,9 +732,45 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
   .frame ol { left: auto; right: 0; border-right: 0; border-left: 1px solid var(--rule); }
 }@media (max-width: 359px) { .zread { display: none !important; } }
 .contact-line { text-align: center; }
-/* phones: label sits above its row so the value never breaks mid-word */
-.contact .btn { overflow-wrap: break-word; }
+/* phones: label stays on the row with value and Copy; value never breaks mid-word */
+.contact .btn { overflow-wrap: normal; word-break: normal; }
+.contact .btn[href*="linkedin"] { overflow-wrap: break-word; }
 @media (max-width: 599px) {
-  .contact > li { grid-template-columns: minmax(0, 1fr) var(--cw); row-gap: 8px; }
-  .contact .k { grid-column: 1 / -1; }
+  .contact { --lw: 58px; }
+  .contact > li { column-gap: 6px; }
+  .contact .k { font-size: 10.5px; letter-spacing: 0.02em; }
+  .contact .btn { font-size: clamp(11px, 3.4vw, 14px); padding: 10px clamp(4px, 1.6vw, 10px); }
+}
+/* experience: stats live in the left column on PC (grid areas), below the tag */
+@media (min-width: 900px) {
+  #experience .split-side { grid-area: side; } #experience .exp-body { grid-area: body; } #experience .split > .stats-3 { grid-area: stats; }
+  #experience .split { grid-template-areas: "side body" "fill stats"; row-gap: 0; }
+}
+@media (min-width: 1000px) {
+  #experience .split { grid-template-rows: auto auto 1fr; grid-template-areas: "side body" "stats body" "fill body"; }
+  .split > .stats-3 { grid-template-columns: 1fr; margin-top: 32px; align-self: start; }
+  .split > .stats-3 .stat { border-right: 0; border-bottom: 1px solid var(--ink); padding: 18px 20px 20px; }
+  .split > .stats-3 .stat:last-child { border-bottom: 0; }
+  .split > .stats-3 .val { font-size: 32px; white-space: nowrap; }
+}
+
+/* phones and tablets: centre free text (hero, About, Skills and Contact tables excluded) */
+@media (max-width: 999px) {
+  .split-side, .paper-body, .proj-body { align-items: center; text-align: center; }
+  .split-side .tag, #experience .rows, #experience .exp-body { align-self: center; }
+  .rows li, .courses li, .paper, .tb > div, .tblock > div { text-align: center; }
+  .rows { margin-inline: auto; }
+  .exp-pics { margin-inline: auto; }
+  #experience .stats-3 .stat { align-items: center; text-align: center; }
+  #experience .stats-3 .lab { margin-inline: auto; }
+  .paper .status { justify-self: center; text-align: center; justify-content: center; }
+  .paper .paper-body { justify-self: center; }
+  .meta, .irow .top { justify-content: center; }
+  .irow .main, .irow .ttl, .irow .dom, .irow .yr, .irow .no { text-align: center; align-items: center; }
+  .irow .stamp { margin-inline: auto; }
+  .feat .line, .proj .line { margin-inline: auto; }
+  .tblock > div, .tb > div { align-items: center; }
+  .tb a { align-self: center; }
+  .filters { justify-content: center; }
+  .more { display: flex; width: fit-content; margin-inline: auto; }
 }
