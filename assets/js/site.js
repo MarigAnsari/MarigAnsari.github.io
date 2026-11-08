@@ -153,12 +153,12 @@
   (function () {
     if (!navigator.clipboard) return;
     $$('.copy').forEach(function (b) {
-      var msg = $('[data-copy-msg]', b.parentNode), t;
+      var msg = $('[data-copy-msg]', b.parentNode), lab = $('.cp-t', b) || b, t;
       b.hidden = false;
       b.addEventListener('click', function () {
         navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
-          b.textContent = 'Copied'; b.classList.add('is-done'); if (msg) msg.textContent = b.getAttribute('data-done') || 'Copied';
-          clearTimeout(t); t = setTimeout(function () { b.textContent = 'Copy'; b.classList.remove('is-done'); if (msg) msg.textContent = ''; }, 1800);
+          lab.textContent = 'Copied'; b.classList.add('is-done'); if (msg) msg.textContent = b.getAttribute('data-done') || 'Copied';
+          clearTimeout(t); t = setTimeout(function () { lab.textContent = 'Copy'; b.classList.remove('is-done'); if (msg) msg.textContent = ''; }, 1800);
         }, function () {});
       });
     });
