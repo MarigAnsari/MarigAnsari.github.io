@@ -774,3 +774,82 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
   .filters { justify-content: center; }
   .more { display: flex; width: fit-content; margin-inline: auto; }
 }
+
+/* ---------- phones and tablets: one spacing and axis system (rev18). Everything below sits inside max-width 999, so PC is untouched. ---------- */
+@media (max-width: 999px) {
+  /* one content box: gutter | content | gutter | rail, so left and right edges match everywhere */
+  :root { --rail-x: 24px; --s-sec: 72px; --s-head: 32px; --s-rule: 20px; }
+  .sec, .sec.sec-work { --pt: var(--s-sec); }
+  .band .sec { --pt: 0px; }
+  .band .sec + .sec { --pt: var(--s-sec); }
+  .band { margin-top: var(--s-sec); padding-block: var(--s-sec); }
+  .zhead { margin-bottom: var(--s-head); }
+  .feat-head { margin-top: var(--s-sec); margin-bottom: var(--s-head); }
+  .filters { margin-bottom: var(--s-rule); }
+  .foot { margin-top: var(--s-sec); padding-bottom: 56px; }
+  .totop { left: calc(50% - var(--rail-x) / 2 + (env(safe-area-inset-left) - env(safe-area-inset-right)) / 2); }
+
+  /* hero: one centre axis, like every other section */
+  .c-label { justify-content: center; text-align: center; }
+  .role { justify-content: center; }
+  .c-name, .c-intro { text-align: center; }
+  .intro { text-wrap: balance; }
+  .sheet .stat { align-items: center; text-align: center; }
+  .sheet .stat .lab { margin-inline: auto; }
+
+  /* work filters and counter */
+  .fchip { justify-content: center; text-align: center; gap: 6px; }
+  .icount { justify-self: center; margin-inline: auto; }
+
+  /* featured cards: tags centred on the plate, one table width, no orphans */
+  .plate .dchip { left: 50%; right: auto; transform: translateX(-50%); white-space: nowrap; }
+  .plate .stamp { top: auto; bottom: 10px; right: auto; left: 50%; transform: translateX(-50%); }
+  .proj .tblock { width: 100%; max-width: 560px; align-self: center; margin-top: 4px; }
+  .rows li { text-wrap: pretty; }
+  .line, .contact-line, .tb .v, .split-side h3, .split-side .mono, .role2 { text-wrap: balance; }
+  .irow .stamp { display: block; width: fit-content; max-width: 100%; margin: 6px auto 0; line-height: 1.25; text-wrap: balance; }
+
+  /* experience / education / research: one rule colour, one rule-to-content gap */
+  .split { border-top-color: var(--ink); padding-top: var(--s-rule); }
+  .paper { padding-block: var(--s-rule); }
+  .paper .status { display: block; max-width: 34ch; margin-inline: auto; text-align: center; text-wrap: balance; }
+  .status .dot { display: inline-block; margin: 0 8px 0 0; vertical-align: -1px; }
+
+  /* skills and contact tables: first row sits the same distance under the rule as the other sections */
+  .skgroup { padding-block: var(--s-rule); }
+  .contact > li { padding-block: var(--s-rule); }
+  .contact-line { margin-bottom: var(--s-rule); }
+
+  /* footer title block: values share one row height so labels and values line up across cells */
+  .tb .v { min-height: 24px; }
+}
+@media (max-width: 899px) {
+  .about-text { margin-inline: auto; }
+  .about-pic { margin-top: var(--s-head); padding-bottom: 28px; }
+  .irow { padding-block: var(--s-rule); }
+}
+/* tablets: thumbnail left, arrow in an equal column on the right, so the centred text sits on the row axis */
+@media (min-width: 600px) and (max-width: 899px) {
+  .irow { grid-template-columns: 96px minmax(0, 1fr) 96px; }
+  .irow .arr { justify-self: end; }
+}
+/* phones: thumbnail stacked above centred text, arrow in the right margin */
+@media (max-width: 599px) {
+  .irow { grid-template-columns: minmax(0, 1fr); grid-template-areas: "th" "main"; justify-items: center; gap: 10px 0; padding-inline: 28px; min-height: 0; }
+  .irow .ithumb { width: 112px; height: 76px; }
+  .irow .main { width: 100%; }
+  .irow .arr { position: absolute; right: 4px; top: calc(var(--s-rule) + 38px); margin-top: -0.55em; line-height: 1; }
+  .contact .btn { min-height: 58px; }
+  .tb > div { padding-inline: 8px; }
+  .tb .v { font-size: 12.5px; letter-spacing: 0.02em; }
+}
+@media (max-width: 359px) { :root { --gutter: 12px; } }
+/* 900 to 999: the two-column label layout is too tight, so About stacks and the Experience stats stay on one line */
+@media (min-width: 900px) and (max-width: 999px) {
+  .about { padding-left: 0; grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .about-text { margin-inline: auto; }
+  .about-pic { justify-content: center; margin-top: var(--s-head); padding-bottom: 28px; }
+  .about-pic .detail { max-width: 230px; }
+  .stats-3 .stat { padding: 20px 12px 22px; }
+  .stats-3 .val { font-size: 36px; white-space: nowrap; }
+}
