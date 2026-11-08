@@ -73,35 +73,39 @@
     items.forEach(function (el) { io.observe(el); });
   })();
 
-  /* index filter, show more / fewer */
+  /* work: one filter row over cards for every project. Featured is the default view. Which cards show, and which of them is the
+     large one (first and fifth visible), is decided here; without this file all cards show in the same layout. */
   (function () {
-    var list = $('.index'); if (!list) return;
-    var rows = $$('.irow', list), bar = $('.filters'), count = $('.icount');
-    if (bar) {
-      var chips = $$('.fchip', bar), more = $('.more'), box = $('.index-more'), label = more && $('.more-t', more);
-      var key = 'all', expanded = false, hiddenN = box ? $$('.irow', box).length : 0, total = rows.length, tail = total - hiddenN;
-      if (box) $$('.irow', box).forEach(function (r) { r.classList.remove('rv', 'in'); });
-      // filter: only matching rows are shown (hidden, not dimmed); the featured-eight limit is lifted while filtering
-      function render(instant) {
-        var filtered = key !== 'all', n = 0;
-        if (instant) list.classList.add('instant');
-        rows.forEach(function (r) { var on = !filtered || r.getAttribute('data-g') === key; r.hidden = !on; if (on) n++; });
-        if (box) box.classList.toggle('is-collapsed', !filtered && !expanded);
-        if (more) { more.hidden = filtered; more.setAttribute('aria-expanded', String(expanded)); label.textContent = expanded ? 'Show fewer' : 'Show all ' + total + ' projects'; }
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-g') === key)); });
-        if (!filtered && !expanded) n = tail;
-        if (count) count.textContent = ('0' + n).slice(-2) + ' / ' + ('0' + total).slice(-2);
-        if (instant) { void list.offsetHeight; list.classList.remove('instant'); }
-      }
-      chips.forEach(function (c) { c.addEventListener('click', function () { key = c.getAttribute('data-g'); render(true); }); });
-      if (more) more.addEventListener('click', function () {
-        if (!expanded) { expanded = true; render(false); return; }
-        // collapse at once and keep the button where it was under the pointer, so the page does not jump
-        var y0 = more.getBoundingClientRect().top; expanded = false; render(true);
-        window.scrollTo({ top: window.scrollY + (more.getBoundingClientRect().top - y0), behavior: 'instant' });
+    var grid = $('#work-grid'), bar = $('.filters'); if (!grid || !bar) return;
+    var cards = $$('.proj', grid), chips = $$('.fchip', bar), more = $('.more'), label = more && $('.more-t', more), count = $('.icount'), head = $('.bar');
+    var key = 'featured', total = cards.length;
+    function match(c) { return key === 'all' || (key === 'featured' ? c.hasAttribute('data-f') : c.getAttribute('data-g') === key); }
+    function render() {
+      var n = 0;
+      cards.forEach(function (c) {
+        var on = match(c); c.hidden = !on;
+        if (on) { c.classList.toggle('feat', n === 0 || n === 4); c.classList.toggle('flip', n === 4); n++; }
       });
-      bar.hidden = false; render(true);
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-g') === key)); });
+      if (count) count.textContent = ('0' + n).slice(-2) + ' / ' + ('0' + total).slice(-2);
+      if (more) { more.setAttribute('data-state', key === 'all' ? 'all' : 'part'); label.textContent = key === 'all' ? 'Show featured only' : 'Show all ' + total + ' projects'; }
     }
+    // filter change: a quick fade, no movement
+    function fade() { if (!reduce && grid.animate) grid.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }); }
+    // keep the top of the chips in view under the sticky header; scroll only when they are not
+    function showChips() {
+      var top = bar.getBoundingClientRect().top, hb = head ? head.getBoundingClientRect().bottom : 0;
+      if (top < hb + 8 || top > window.innerHeight - 120) window.scrollTo({ top: window.scrollY + top - hb - 16 });
+    }
+    function set(k, scroll) {
+      key = k; cards.forEach(function (c) { c.classList.remove('rv', 'in'); });
+      render(); fade(); if (scroll) showChips();
+    }
+    chips.forEach(function (c) { c.addEventListener('click', function () { set(c.getAttribute('data-g'), false); }); });
+    if (more) more.addEventListener('click', function () { set(key === 'all' ? 'featured' : 'all', true); });
+    cards.forEach(function (c) { if (!c.hasAttribute('data-f')) c.classList.remove('rv', 'in'); });
+    render(); grid.setAttribute('data-ready', '');
+    bar.hidden = false; if (more) more.hidden = false;
   })();
 
   /* hero: one-time count-up of the stat numerals. The final value is in the HTML and in a hidden span for readers. */
