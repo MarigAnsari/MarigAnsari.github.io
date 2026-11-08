@@ -97,15 +97,12 @@ a { color: inherit; }
 .bar nav a:hover, .bar nav a[aria-current="true"], .bar nav a[aria-current="page"] { color: var(--ink); }
 .bar nav a:hover::after, .bar nav a[aria-current="true"]::after, .bar nav a[aria-current="page"]::after { transform: scaleX(1); }
 .theme { display: inline-flex; border: 1px solid var(--ink); margin-left: 6px; }
-.theme button, .menu-btn, .fchip, .btn, .copy, .more, .lb button {
+.theme button, .fchip, .btn, .copy, .more, .lb button {
   font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; transition: transform 0.16s var(--ease), background-color 0.15s ease, color 0.15s ease;
 }
 .theme button { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; padding: 0 12px; min-height: 34px; color: var(--muted); }
 .theme button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-.theme button:active, .menu-btn:active, .fchip:active, .copy:active, .more:active, .lb button:active { transform: scale(0.97); }
-.menu-btn { display: none; font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--ink); padding: 0 14px; min-height: 44px; min-width: 76px; align-items: center; justify-content: center; gap: 8px; }
-.menu-btn::after { content: "+"; font-size: 15px; line-height: 1; }
-.menu-btn[aria-expanded="true"]::after { content: "\2212"; }
+.theme button:active, .fchip:active, .copy:active, .more:active, .lb button:active { transform: scale(0.97); }
 /* phones and tablets: slim fixed rail on the right edge, one link per section */
 .frame { display: block; position: fixed; z-index: 40; top: var(--head-h); right: 0; bottom: 0; width: var(--rail); background: var(--paper); border-left: 1px solid var(--ink); }
 .frame ol { display: flex; flex-direction: column; height: 100%; }
@@ -121,26 +118,19 @@ a { color: inherit; }
   @keyframes prog { to { transform: scaleX(1); } }
 }
 
-/* mobile: Menu disclosure (nav stays a plain row without JS) */
+/* mobile: one header row (name, section, theme toggle); the right rail carries the section links */
 @media (max-width: 999px) {
-  .bar-in { flex-wrap: wrap; }
-  .bar nav { width: 100%; flex-wrap: wrap; justify-content: space-between; padding-bottom: 8px; }
-  .bar nav a { min-height: 44px; display: inline-flex; align-items: center; }
-  .bar nav a::after { bottom: 8px; }
+  .bar nav { display: contents; }
+  .bar nav a { display: none; }
   .zread { display: inline-flex; margin-right: auto; padding-left: 10px; }
   .zread .zn { display: none; }
   .zread .zl::after { content: none; }
   .mark { font-size: 20px; }
-  html.js .menu-btn { display: inline-flex; }
-  html.js .bar nav { display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 0 0 8px; border-top: 1px solid var(--rule); }
-  html.js .bar nav.open { display: flex; }
-  html.js .bar nav a { border-bottom: 1px solid var(--rule); font-size: 17px; padding-inline: 2px; color: var(--ink); }
-  html.js .bar nav a::after { display: none; }
-  .theme { margin: 12px 0 4px; align-self: flex-start; }
-  .theme button { min-height: 44px; min-width: 76px; }
+  .theme { margin: 0; }
+  .theme button { min-height: 40px; min-width: 0; padding: 0 10px; }
 }
 @media (max-width: 359px) { .zread .zk { display: none; } }
-@media (max-width: 399px) { .bar-in { gap: 8px; } .mark { font-size: 17px; letter-spacing: 0.02em; } .zread { padding-left: 8px; gap: 6px; font-size: 11px; } .menu-btn { min-width: 70px; padding: 0 10px; } }
+@media (max-width: 399px) { .bar-in { gap: 8px; } .mark { font-size: 17px; letter-spacing: 0.02em; } .zread { padding-left: 8px; gap: 6px; font-size: 11px; } .theme button { padding: 0 8px; font-size: 11px; } }
 @media (min-width: 1000px) {
   .zread { display: inline-flex; }
   .frame { display: block; position: fixed; z-index: 40; pointer-events: none; top: var(--head-h); left: var(--frame); right: var(--frame); bottom: var(--frame); width: auto; background: transparent; border: 1px solid color-mix(in srgb, var(--ink) 55%, transparent); border-top: 0; }
@@ -517,13 +507,13 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 }
 
 /* ---------- contact: title-block row ---------- */
-.contact-line { color: var(--muted); max-width: 52ch; margin-bottom: 28px; }
-.contact { display: grid; grid-template-columns: 1fr; gap: 36px; }
-.contact .acts { flex-wrap: wrap; }
-.contact .btn { max-width: 100%; }
-.contact > li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; min-width: 0; }
-.contact .k { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11.5px; }
-.contact .acts { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: center; }
+.contact-line { color: var(--muted); max-width: 52ch; margin: 0 auto 28px; }
+/* table: label column, value button, Copy; hairline rows under a top rule, like Skills */
+.contact { --lw: 80px; --cw: 44px; max-width: 760px; margin-inline: auto; border-top: 1px solid var(--ink); }
+.contact > li { display: grid; grid-template-columns: var(--lw) minmax(0, 1fr) var(--cw); column-gap: 12px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.contact .k { font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.contact .acts { display: contents; }
+.contact .btn { width: 100%; min-width: 0; justify-content: flex-start; text-align: left; font-size: clamp(12.5px, 4vw, 15px); line-height: 1.25; padding: 10px clamp(9px, 3vw, 14px); }
 .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 600; font-size: 17px; border: 1px solid var(--accent); overflow-wrap: anywhere; }
 @media (hover: hover) { .btn:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); } }
 .btn:active { transform: scale(0.97); }
@@ -531,8 +521,6 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
 .copy.is-done { border-color: var(--accent); color: var(--accent); }
 .copy .cp-i, .copy .cp-ok { display: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; }
 @media (max-width: 599px) {
-  .contact .acts { flex-wrap: nowrap; gap: 8px; align-items: center; }
-  .contact .btn { flex: 0 1 auto; min-width: 0; font-size: clamp(12.5px, 4vw, 15px); line-height: 1.25; padding: 10px clamp(9px, 3vw, 14px); overflow-wrap: anywhere; }
   .copy { flex: none; width: 44px; min-width: 44px; padding: 0; display: inline-grid; place-items: center; }
   .copy .cp-i { display: block; }
   .copy .cp-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -540,12 +528,10 @@ h1.name { font-size: clamp(26px, calc((100vw - 2 * var(--gutter) - var(--rail-x)
   .copy.is-done .cp-ok { display: block; }
 }
 @media (hover: hover) { .copy:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); } }
-/* wide desktop: three cells sized to their content (LinkedIn widest), value and Copy on one line */
-@media (min-width: 1240px) {
-  .contact { grid-template-columns: repeat(3, minmax(max-content, 1fr)); column-gap: 32px; }
-  .contact .acts { flex-wrap: nowrap; gap: 10px; }
-  .contact .btn { font-size: 16px; padding: 0 16px; white-space: nowrap; overflow-wrap: normal; }
-  .contact .copy { min-width: 76px; padding: 0 12px; }
+@media (min-width: 600px) {
+  .contact { --lw: 140px; --cw: 88px; }
+  .contact > li { column-gap: 20px; padding: 20px 0; }
+  .contact .btn { font-size: 16px; padding: 0 16px; }
 }
 
 /* ---------- footer: mini title block ---------- */
@@ -746,3 +732,9 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
   .frame ol { left: auto; right: 0; border-right: 0; border-left: 1px solid var(--rule); }
 }@media (max-width: 359px) { .zread { display: none !important; } }
 .contact-line { text-align: center; }
+/* phones: label sits above its row so the value never breaks mid-word */
+.contact .btn { overflow-wrap: break-word; }
+@media (max-width: 599px) {
+  .contact > li { grid-template-columns: minmax(0, 1fr) var(--cw); row-gap: 8px; }
+  .contact .k { grid-column: 1 / -1; }
+}

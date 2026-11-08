@@ -24,16 +24,6 @@
     group.hidden = false; sync();
   })();
 
-  /* mobile menu disclosure */
-  (function () {
-    var btn = $('.menu-btn'), nav = $('#site-nav'); if (!btn || !nav) return;
-    function set(open) { nav.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); }
-    btn.hidden = false;
-    btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
-    nav.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); } });
-  })();
-
   /* scroll spy: active zone letter in the header and frame, active nav link; JS fallback for the progress rule */
   (function () {
     var spies = $$('[data-spy]'); if (!spies.length) return;
