@@ -709,3 +709,28 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
   .crop { transform: none !important; }
   @supports (animation-timeline: scroll()) { .progress { animation: prog linear both !important; animation-timeline: scroll(root); } }
 }
+
+/* ---------- hero: actions and proof strip (rev9) ---------- */
+.c-cta { display: flex; gap: 12px; border-top: 1px solid var(--ink); border-bottom: 0; padding: 16px; }
+.hbtn { flex: 1 1 0; min-width: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border: 1px solid var(--ink); font: 500 12.5px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; white-space: nowrap; color: var(--ink); background: transparent; transition: transform 0.16s var(--ease), background-color 0.15s ease, color 0.15s ease; }
+.hbtn-p { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.hbtn:active { transform: scale(0.97); }
+.hbtn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (hover: hover) { .hbtn-s:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); } .hbtn-p:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); border-color: color-mix(in srgb, var(--accent) 86%, var(--ink)); } }
+.c-proof { list-style: none; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); border-bottom: 0; padding: 0; }
+.c-proof li { display: flex; flex-direction: column; gap: 3px; padding: 12px 12px 13px; min-width: 0; border-right: 1px solid var(--rule); font: 400 11px/1.4 var(--mono); letter-spacing: 0.01em; }
+.c-proof li:nth-child(even) { border-right: 0; }
+.c-proof li:nth-child(n+3) { border-top: 1px solid var(--rule); }
+.c-proof .pk { color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; }
+.c-proof .pv { color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
+.c-proof a.pv { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.c-proof a.pv:hover { text-decoration-color: var(--accent); color: var(--accent); }
+@media (min-width: 520px) { .hbtn { flex: 0 0 auto; padding: 0 22px; } .c-cta { padding: 16px 20px; } .c-proof li { font-size: 12px; padding: 14px 16px 15px; } .c-proof .pk { font-size: 10.5px; } }
+@media (min-width: 900px) {
+  .c-cta { grid-column: 1 / 9; grid-row: 5; padding: 22px 28px; }
+  .c-proof { grid-column: 1 / 9; grid-row: 6; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .c-proof li { padding: 14px 18px 16px; border-top: 0 !important; }
+  .c-proof li:nth-child(even) { border-right: 1px solid var(--rule); }
+  .c-proof li:last-child { border-right: 0; }
+}
+.sheet > .c-cta, .sheet > .c-proof { position: relative; z-index: 1; }
