@@ -15,9 +15,11 @@
     btns.forEach(function (b) {
       b.addEventListener('click', function () {
         var t = b.getAttribute('data-t');
-        doc.setAttribute('data-theme', t);
+        if (t === current()) return;
+        function apply() { doc.setAttribute('data-theme', t); sync(); }
         try { localStorage.setItem('theme', t); } catch (e) {}
-        sync();
+        if (document.startViewTransition) document.startViewTransition(apply);
+        else { doc.classList.add('tx'); apply(); setTimeout(function () { doc.classList.remove('tx'); }, 350); }
       });
     });
     if (mq && mq.addEventListener) mq.addEventListener('change', sync);
@@ -56,18 +58,20 @@
     window.addEventListener('scroll', req, { passive: true }); window.addEventListener('resize', req); update();
   })();
 
-  /* one-time reveals */
+  /* one-time reveals: headings, cards, rows. Under reduced motion the CSS drops the movement and keeps a 200ms fade. */
   (function () {
-    if (reduce || !('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) return;
+    $$('.zhead').forEach(function (h) { h.classList.add('rv', 'zh'); });
     var items = $$('.rv'); if (!items.length) return;
     doc.classList.add('rv-on');
     var io = new IntersectionObserver(function (entries) {
       var batch = entries.filter(function (e) { return e.isIntersecting; });
       batch.forEach(function (e, i) {
         var el = e.target; io.unobserve(el);
-        el.style.setProperty('--d', Math.min(i, 8) * 40 + 'ms');
+        var d = Math.min(i, 8) * 50;
+        el.style.setProperty('--d', d + 'ms');
         el.classList.add('in');
-        setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, 700);
+        setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, 900 + d);
       });
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
     items.forEach(function (el) { io.observe(el); });
@@ -115,7 +119,7 @@
       els.forEach(function (el) {
         var to = +el.getAttribute('data-to'), t0 = null; el.textContent = '0';
         (function step(now) {
-          if (t0 === null) t0 = now; var p = Math.min(1, (now - t0) / 900);
+          if (t0 === null) t0 = now + 300; var p = Math.max(0, Math.min(1, (now - t0) / 900));
           el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
           if (p < 1) requestAnimationFrame(step);
         })(performance.now());
@@ -141,6 +145,50 @@
       if (hero) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; if (seen) play(); else pause(); }, { threshold: 0 }).observe(hero);
     } else go();
     document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); else play(); });
+  })();
+
+  /* pointer glow: one passive listener, one rAF per frame. Boxes under the cursor get .lit and --mx/--my; CSS draws the glow (pointer-fine only).
+     A card's stretched link sits over its image and meta box, so those are hit-tested by position. */
+  (function () {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var SEL = '.plate:not(.lb-plate),.tblock,.stat,.skgroup,.contact>li,.paper,.tb>div', ev, raf = 0, lit = [];
+    function paint(clear) {
+      raf = 0;
+      var t = ev.target, els = [], el = t.closest && t.closest(SEL), card = t.closest && t.closest('.proj');
+      for (; el; el = el.parentElement && el.parentElement.closest(SEL)) els.push(el);
+      if (card) $$('.plate,.tblock', card).forEach(function (n) { if (els.indexOf(n) < 0) els.push(n); });
+      var on = [];
+      els.map(function (n) { return n.getBoundingClientRect(); }).forEach(function (r, i) {
+        if (clear !== true && ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom) {
+          els[i].style.setProperty('--mx', ev.clientX - r.left + 'px'); els[i].style.setProperty('--my', ev.clientY - r.top + 'px'); on.push(els[i]);
+        }
+      });
+      lit.forEach(function (n) { if (on.indexOf(n) < 0) n.classList.remove('lit'); });
+      on.forEach(function (n) { n.classList.add('lit'); });
+      lit = on;
+    }
+    addEventListener('pointermove', function (e) { ev = e; if (!raf) raf = requestAnimationFrame(paint); }, { passive: true });
+    doc.addEventListener('mouseleave', function () { if (ev) paint(true); });
+  })();
+
+  /* header nav: one rule slides to the hovered link, and rests on the current section's link */
+  (function () {
+    var nav = $('.bar nav'); if (!nav) return;
+    var ink = document.createElement('i'), hov = null, shown = false;
+    ink.className = 'nav-ink'; ink.setAttribute('aria-hidden', 'true'); nav.appendChild(ink); nav.classList.add('ink-on');
+    function place() {
+      var a = hov || $('a[aria-current]', nav);
+      if (!a || !a.offsetWidth) { ink.style.opacity = 0; shown = false; return; }
+      if (!shown) ink.style.transition = 'none';
+      ink.style.transform = 'translateX(' + a.offsetLeft + 'px) scaleX(' + a.offsetWidth + ')'; ink.style.opacity = 1;
+      if (!shown) { void ink.offsetWidth; ink.style.transition = ''; shown = true; }
+    }
+    function over(e) { hov = e.target.closest('a'); place(); }
+    function out() { hov = null; place(); }
+    nav.addEventListener('pointerover', over); nav.addEventListener('focusin', over);
+    nav.addEventListener('pointerleave', out); nav.addEventListener('focusout', out);
+    if (window.MutationObserver) new MutationObserver(place).observe(nav, { attributes: true, subtree: true, attributeFilter: ['aria-current'] });
+    window.addEventListener('resize', place); if (document.fonts) document.fonts.ready.then(place); place();
   })();
 
   /* copy buttons (email, phone, LinkedIn): copy the plain value, brief "Copied" state, polite announcement */
