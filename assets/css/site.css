@@ -77,6 +77,14 @@
   --plate: #151c25; --plate-paper: #f1e7ce; --plate-line: rgba(234, 219, 184, 0.5);
 }
 
+/* home page only (body.home): neutral cream paper and classic navy ink. Other pages keep the :root tokens above.
+   To move the whole site to this palette, copy these values into :root, the dark media block and :root[data-theme="dark"]. */
+body.home { --paper: #f3ede1; --ink: #1c2b45; --muted: #545d6e; --rule: #c8c6c2; --band: #eae2d2; --grid: rgba(28, 43, 69, 0.14); --grid-major: rgba(28, 43, 69, 0.26); --accent: #a57f2c; --accent-text: #5c440f; --on-accent: #0a1220; --line: var(--ink); --plate: #eae5db; --plate-paper: #f7f3eb; --plate-line: rgba(28, 43, 69, 0.78); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) body.home { --paper: #131d30; --ink: #ece5d6; --muted: #a2a19e; --rule: #363d4b; --band: #18243a; --grid: rgba(236, 229, 214, 0.12); --grid-major: rgba(236, 229, 214, 0.24); --accent: #d9b25e; --accent-text: #d9b25e; --on-accent: #131d30; --line: color-mix(in srgb, var(--ink) 72%, var(--paper)); --plate: #232c3c; --plate-paper: #f1e7ce; --plate-line: rgba(236, 229, 214, 0.5); }
+}
+:root[data-theme="dark"] body.home { --paper: #131d30; --ink: #ece5d6; --muted: #a2a19e; --rule: #363d4b; --band: #18243a; --grid: rgba(236, 229, 214, 0.12); --grid-major: rgba(236, 229, 214, 0.24); --accent: #d9b25e; --accent-text: #d9b25e; --on-accent: #131d30; --line: color-mix(in srgb, var(--ink) 72%, var(--paper)); --plate: #232c3c; --plate-paper: #f1e7ce; --plate-line: rgba(236, 229, 214, 0.5); }
+
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--head-h) + 72px); -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
@@ -482,9 +490,9 @@ html.js .work-grid:not([data-ready]) .proj:not([data-f]) { display: none; }
 }
 .lnk:hover, .doi a:hover, .foot a:hover, .pub a:hover { background-size: 100% 3px; }
 @media (min-width: 900px) {
-  .paper { grid-template-columns: 224px minmax(0, 1fr) 240px; gap: 40px; padding: 32px 0; align-items: start; }
+  .paper { grid-template-columns: 256px minmax(0, 1fr) 240px; gap: 40px; padding: 32px 0; align-items: start; }
   .pthumb { width: 100%; grid-column: 1; grid-row: 1; }
-  .paper .status { justify-self: end; text-align: left; grid-column: 3; grid-row: 1; }
+  .paper-aside { grid-column: 3; grid-row: 1; }
   .paper .paper-body { grid-column: 2; grid-row: 1; }
 }
 @media (max-width: 999px) { .pthumb { justify-self: center; } }
@@ -767,6 +775,9 @@ figcaption { font-size: 14.5px; line-height: 1.45; color: var(--muted); max-widt
 /* ---------- lightbox ---------- */
 dialog.lb { border: 1px solid var(--line); padding: 0; background: var(--paper); color: var(--ink); max-width: min(96vw, 1500px); max-height: 96dvh; width: auto; overflow: hidden; }
 dialog.lb::backdrop { background: rgba(4, 12, 25, 0.74); }
+body.home dialog.lb::backdrop { background: rgba(28, 43, 69, 0.74); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body.home dialog.lb::backdrop { background: rgba(19, 29, 48, 0.74); } }
+:root[data-theme="dark"] body.home dialog.lb::backdrop { background: rgba(19, 29, 48, 0.74); }
 dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms var(--ease); }
 @keyframes lbin { from { opacity: 0; transform: scale(0.98); } }
 .lb-plate { display: flex; align-items: center; justify-content: center; border: 0; border-bottom: 1px solid var(--line); padding: 20px; min-height: min(40dvh, 320px); min-width: min(60vw, 520px); overflow: auto; flex: 1 1 auto; }
@@ -835,6 +846,9 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
   #experience .stats-3 .stat { align-items: center; text-align: center; }
   #experience .stats-3 .lab { margin-inline: auto; }
   .paper .status { justify-self: center; text-align: center; justify-content: center; }
+  .paper-aside { justify-self: center; align-items: center; text-align: center; width: 100%; }
+  .paper .tblock { max-width: 340px; margin-inline: auto; }
+  .courses li { justify-content: center; }
   .paper .paper-body { justify-self: center; }
   .meta { justify-content: center; }
   .feat .line, .proj .line { margin-inline: auto; }
@@ -1057,6 +1071,13 @@ html.tx *, html.tx *::before, html.tx *::after { transition: background-color 0.
 .skgroup h3 .ic { width: 14px; height: 14px; margin-top: 1px; color: var(--muted); }
 /* research: links to the project pages */
 .paper > a { display: contents; }
+.paper-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; min-width: 0; }
+.paper .tblock { width: 100%; margin-top: 0; }
+.kf { max-width: 52ch; font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.kf-h { display: block; font: 500 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 4px; }
+.courses li { display: flex; align-items: flex-start; gap: 10px; }
+.courses li .ic { width: 14px; height: 14px; margin-top: 2px; color: var(--accent-text); }
+.stat-ic { width: 22px; height: 22px; color: var(--accent-text); }
 .paper h3 a { color: inherit; text-decoration: none; }
 @media (hover: hover) { .paper h3 a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; text-decoration-color: var(--accent); } }
 /* =====================================================================
@@ -1120,6 +1141,8 @@ body.sub .pbody > p + .rt, body.sub .rt + p.ptext { margin-top: 20px; }
 .plate.is-dark { background: #020711; border-color: var(--line); --plate-line: rgba(234, 219, 184, 0.55); box-shadow: inset 0 0 0 1px rgba(234, 219, 184, 0.1); }
 .fplate.is-dark { padding: 18px; }
 .plate.is-dark img { outline: 1px solid rgba(234, 219, 184, 0.22); outline-offset: 0; }
+body.home .plate.is-dark { --plate-line: rgba(236, 229, 214, 0.55); box-shadow: inset 0 0 0 1px rgba(236, 229, 214, 0.1); }
+body.home .plate.is-dark img { outline: 1px solid rgba(236, 229, 214, 0.22); }
 
 /* ---------- floating button on project pages: Back to top only, after about 40 percent of the page ---------- */
 body.sub .totop, body.sub .totop.is-up { left: auto; top: auto; margin: 0; bottom: max(20px, env(safe-area-inset-bottom));
@@ -1210,6 +1233,10 @@ body.sub .totop svg { transform: none; }
 .hl-cell:active { background: var(--wash); }
 .hl-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 .hl-cell:focus-visible .hl-go { opacity: 1; transform: none; }
+.hl-cell .hl-txt { font-size: clamp(20px, 5.6vw, 26px); line-height: 1.05; text-wrap: balance; }
+@media (min-width: 1000px) { .hl-cell .hl-txt { font-size: clamp(16px, 1.6vw, 22px); } }
+.hl-row li { display: flex; }
+.hl-row .hl-cell { flex: 1; }
 @media (hover: hover) and (pointer: fine) { .hl-cell:hover .hl-n { color: var(--accent-text); } .hl-cell:hover .hl-go { opacity: 1; transform: none; } }
 @media (min-width: 720px) {
   .hl-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
