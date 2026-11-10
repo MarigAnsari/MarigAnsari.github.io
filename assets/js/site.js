@@ -119,17 +119,17 @@
       els.forEach(function (el) {
         var to = +el.getAttribute('data-to'), t0 = null; el.textContent = '0';
         (function step(now) {
-          if (t0 === null) t0 = now + 300; var p = Math.max(0, Math.min(1, (now - t0) / 900));
+          if (t0 === null) t0 = now + 80; var p = Math.max(0, Math.min(1, (now - t0) / 900));
           el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
           if (p < 1) requestAnimationFrame(step);
         })(performance.now());
       });
     }
     var hero = $('.sheet'); if (!hero || !('IntersectionObserver' in window)) { run(); return; }
-    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: 0.3 }); io.observe(hero);
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: 0.15 }); io.observe(hero);
   })();
 
-  /* hero Klann figure: plots itself once, then one orange dot circles the foot path (one lap every 7 s), paused when off screen or the tab is hidden */
+  /* hero Klann figure: plots itself once, then one gold dot circles the foot path (one lap every 7 s), paused when off screen or the tab is hidden */
   (function () {
     var k = $('.klann'); if (!k) return;
     var dot = $('.k-dot', k), path = $('#kfp', k), hero = $('.sheet');
@@ -209,9 +209,27 @@
   /* floating two-way button: upper half of the page = bottom centre, points down, goes to the bottom;
      lower half = top centre, points up, goes to the top. 45/55 percent hysteresis stops flicker at the midpoint. */
   (function () {
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop on is-down';
+    var sub = document.body.classList.contains('sub');
+    var b = document.createElement('button'); b.type = 'button'; b.className = sub ? 'totop is-up' : 'totop on is-down';
     b.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 15V3M3.5 8.5L9 3l5.5 5.5"/></svg>';
     document.body.appendChild(b);
+    if (sub) {
+      /* project pages: Back to top only, shown after about 40 percent of the page */
+      b.setAttribute('aria-label', 'Back to top');
+      var tk = false;
+      var upd = function () {
+        tk = false;
+        var mx = document.documentElement.scrollHeight - window.innerHeight, on = mx > 0 && window.scrollY / mx > 0.4;
+        b.classList.toggle('on', on);
+      };
+      window.addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(upd); } }, { passive: true });
+      window.addEventListener('resize', upd); upd();
+      b.addEventListener('click', function (e) {
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        if (e.detail === 0) { var m = $('.mark'); if (m) m.focus({ preventScroll: true }); }
+      });
+      return;
+    }
     var down = true, ticking = false;
     function apply() {
       b.classList.toggle('is-down', down); b.classList.toggle('is-up', !down);
@@ -264,8 +282,9 @@
 
   /* figure lightbox: <dialog>, image at natural size on paper, arrows, Esc, focus trap */
   (function () {
-    var links = $$('a[data-fig]');
-    if (!links.length || !window.HTMLDialogElement) return;
+    var all = $$('a[data-fig]'), links = all;
+    if (!all.length || !window.HTMLDialogElement) return;
+    function visible() { return all.filter(function (a) { return a.offsetParent !== null; }); }   // phones show a second copy of the hero figure; only the visible ones are in the viewer
     var dlg = document.createElement('dialog'); dlg.className = 'lb'; dlg.setAttribute('aria-label', 'Figure viewer');
     dlg.innerHTML = '<div class="plate lb-plate"></div><div class="lb-bar"><p class="lb-cap"><span class="lb-n"></span><span class="lb-t"></span></p>' +
       '<div class="lb-ctl"><span class="lb-pos"></span><button type="button" data-a="prev" aria-label="Previous figure">&larr;</button><button type="button" data-a="next" aria-label="Next figure">&rarr;</button><button type="button" data-a="close">Close</button></div></div>';
@@ -275,12 +294,12 @@
       i = (k + links.length) % links.length; var a = links[i];
       plate.className = 'plate lb-plate ' + (a.getAttribute('data-cls') || '');
       img.src = a.getAttribute('href'); img.alt = a.getAttribute('data-cap') || ''; if (!img.parentNode) plate.appendChild(img);
-      n.textContent = a.getAttribute('data-n'); t.textContent = a.getAttribute('data-cap');
+      n.textContent = a.getAttribute('data-n'); t.textContent = (a.getAttribute('data-cap') || '').replace(/([A-Za-z0-9])-(?=[A-Za-z0-9])/g, '$1‑');   // no break at a hyphen inside a word
       pos.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + links.length).slice(-2);
     }
-    function open(k, from) { opener = from; show(k); if (!dlg.open) dlg.showModal(); doc.classList.add('lb-open'); $('[data-a="close"]', dlg).focus(); }
-    links.forEach(function (a, k) {
-      a.addEventListener('click', function (e) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); open(k, a); });
+    function open(k, from) { opener = from; links = visible(); show(k); if (!dlg.open) dlg.showModal(); doc.classList.add('lb-open'); $('[data-a="close"]', dlg).focus(); }
+    all.forEach(function (a) {
+      a.addEventListener('click', function (e) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); open(visible().indexOf(a), a); });
     });
     dlg.addEventListener('click', function (e) {
       var b = e.target.closest('button');

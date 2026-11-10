@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marigansari.github.io/sitemap.xml

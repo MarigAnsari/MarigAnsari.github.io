@@ -5,12 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ANN Regression for Nanofluid Heat Transfer Coefficient | Marig Shabbir Ansari</title>
 <meta name="description" content="Feedforward neural network that predicts the heat transfer coefficient of a nanofluid from nine input properties.">
+<link rel="canonical" href="https://marigansari.github.io/projects/ann-regression.html">
+<meta property="og:site_name" content="Marig Shabbir Ansari">
+<meta property="og:title" content="ANN Regression for Nanofluid Heat Transfer Coefficient | Marig Shabbir Ansari">
+<meta property="og:description" content="Feedforward neural network that predicts the heat transfer coefficient of a nanofluid from nine input properties.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://marigansari.github.io/projects/ann-regression.html">
+<meta property="og:image" content="https://marigansari.github.io/assets/img/og/og-share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Marig Shabbir Ansari, Mechanical Engineer: drafting-sheet share card with 20 projects, a published paper and 3rd place at GIKI Open House 2026">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ANN Regression for Nanofluid Heat Transfer Coefficient | Marig Shabbir Ansari">
+<meta name="twitter:description" content="Feedforward neural network that predicts the heat transfer coefficient of a nanofluid from nine input properties.">
+<meta name="twitter:image" content="https://marigansari.github.io/assets/img/og/og-share.png">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314161a'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23ff7b3a' stroke-width='2'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#EADBB8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#040C19" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040C19'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='%23E0B354' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="../assets/img/icon/apple-touch-icon.png">
 <script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})()</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){if(!/^https?:/.test(location.protocol))return;var l=document.createElement('link');l.rel='preload';l.as='font';l.type='font/woff2';l.crossOrigin='';l.href='../assets/fonts/big-shoulders-display-latin.woff2';document.head.appendChild(l)})()</script>
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body class="sub">
@@ -32,21 +47,24 @@
   <p class="back"><a href="../index.html#work"><span aria-hidden="true">&larr;</span>&nbsp;Work</a></p>
   <div class="sheet psheet">
     <div class="cell pnum" aria-hidden="true"><span class="big-num">18</span><span class="of">/ 20</span></div>
-    <div class="cell ptitle"><h1>ANN Regression for Nanofluid Heat Transfer Coefficient</h1></div>
-    <nav class="pstrip" aria-label="On this page"><p class="pstrip-h">On this page</p><ul><li><a href="#h-summary" data-toc>Summary</a></li><li><a href="#h-problem" data-toc>Problem</a></li><li><a href="#h-method" data-toc>Method</a></li><li><a href="#h-results" data-toc>Results</a></li><li><a href="#h-validation" data-toc>Validation</a></li><li><a href="#h-limitations" data-toc>Limitations</a></li><li><a href="#h-tools" data-toc>Tools</a></li></ul></nav>
-    <dl class="spec s4"><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-domain"/></svg>Domain</dt><dd>Machine learning regression</dd></div><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-cal"/></svg>Year</dt><dd>2025</dd></div><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-team"/></svg>Team</dt><dd>Individual project</dd></div><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-cap"/></svg>Course</dt><dd>ME-404 Artificial Intelligence for Mechanical Engineers</dd></div><div class="sp w"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tools"/></svg>Tools</dt><dd><ul class="sp-tools"><li>TensorFlow</li><li>Keras</li></ul></dd></div><div class="sp w res"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-result"/></svg>Result</dt><dd class="mono">Test mean squared error of about 1.66e5</dd></div></dl>
+    <div class="cell ptitle"><h1>ANN Regression for Nanofluid Heat Transfer Coefficient</h1><p class="headnum"><span class="hn-n">407 W/m²K</span><span class="hn-l">test RMSE</span></p></div>
+    <div class="cell phook"><figure class="fig wide fig-m"><a class="fplate plate is-chart" href="../assets/img/ann-regression/hero-full-crop.webp" data-fig data-n="FIG. 01" data-cap="Training and validation mean squared error against epochs." data-cls="is-chart"><img src="../assets/img/ann-regression/hero-full-crop.webp" width="900" height="555" style="--nw:900" alt="Training and validation mean squared error against epochs." decoding="async"></a>
+  <figcaption><span class="fn">FIG. 01</span><span>Training and validation mean squared error against epochs.</span></figcaption></figure><p class="phook-h">Key challenge</p><p>A 32 and 16 neuron network predicts nanofluid heat transfer coefficient from nine properties with a test RMSE of about 407 W/m²K, with training and validation loss converging together.</p></div>
+    <nav class="pstrip" aria-label="Page sections"><p class="pstrip-h">On this page</p><ul><li><a href="#h-summary" data-toc>Summary</a></li><li><a href="#h-problem" data-toc>Problem</a></li><li><a href="#h-method" data-toc>Method</a></li><li><a href="#h-results" data-toc>Results</a></li><li><a href="#h-validation" data-toc>Validation</a></li><li><a href="#h-limitations" data-toc>Limitations</a></li><li><a href="#h-tools" data-toc>Tools</a></li></ul></nav>
+    <dl class="spec s4"><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-domain"/></svg>Domain</dt><dd>Machine learning regression</dd></div><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-cal"/></svg>Year</dt><dd>2025</dd></div><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-team"/></svg>Team</dt><dd>Individual project</dd></div><div class="sp sh"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-cap"/></svg>Course</dt><dd>ME‑404 Artificial Intelligence for Mechanical Engineers</dd></div><div class="sp w"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-tools"/></svg>Tools</dt><dd><ul class="sp-tools"><li>TensorFlow</li><li>Keras</li></ul></dd></div><div class="sp w res"><dt><svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-result"/></svg>Result</dt><dd class="mono">Test mean squared error of about 1.66 × 10⁵</dd></div></dl>
   </div>
 </div>
 
 <div class="wrap pdetail">
 <div class="pmain">
-<section class="prow rv" aria-labelledby="h-summary"><h2 id="h-summary">Summary</h2><div class="pbody"><div class="srows"><div class="sr-row"><h3>What</h3><p>Feedforward neural network that predicts the heat transfer coefficient of a nanofluid from nine input properties.</p></div><div class="sr-row"><h3>Role</h3><p>Trained a 32-16-1 Keras network on nine nanofluid properties to predict heat transfer coefficient and evaluated it by test MSE and loss curves, as sole author.</p></div><div class="sr-row"><h3>Results</h3><ol class="sres"><li>Two hidden layers of 32 and 16 neurons on nine inputs.</li><li>Test mean squared error of about 1.66e5.</li><li>Training and validation loss curves converge and stay close.</li></ol></div></div>
-<div class="hero-fig"><figure class="fig"><a class="fplate plate is-chart" href="../assets/img/ann-regression/hero-full.png" data-fig data-n="FIG. 01" data-cap="Training and validation mean squared error against epochs." data-cls="is-chart"><img src="../assets/img/ann-regression/hero-full.png" width="910" height="557" style="--nw:910" alt="Training and validation mean squared error against epochs." decoding="async"></a>
+<section class="prow rv" aria-labelledby="h-summary"><h2 id="h-summary">Summary</h2><div class="pbody"><div class="srows"><div class="sr-row"><h3>What</h3><p>Feedforward neural network that predicts the heat transfer coefficient of a nanofluid from nine input properties.</p></div><div class="sr-row sr-chal"><h3>Key challenge</h3><p>A 32 and 16 neuron network predicts nanofluid heat transfer coefficient from nine properties with a test RMSE of about 407 W/m²K, with training and validation loss converging together.</p></div><div class="sr-row"><h3>Results</h3><ol class="sres"><li>Two hidden layers of 32 and 16 neurons on nine inputs.</li><li>Training and validation loss curves converge and stay close.</li></ol></div></div>
+<div class="hero-fig"><figure class="fig wide"><a class="fplate plate is-chart" href="../assets/img/ann-regression/hero-full-crop.webp" data-fig data-n="FIG. 01" data-cap="Training and validation mean squared error against epochs." data-cls="is-chart"><img src="../assets/img/ann-regression/hero-full-crop.webp" width="900" height="555" style="--nw:900" alt="Training and validation mean squared error against epochs." decoding="async"></a>
   <figcaption><span class="fn">FIG. 01</span><span>Training and validation mean squared error against epochs.</span></figcaption></figure></div></div></section>
-<section class="prow rv" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Predict the heat transfer coefficient (W/m2K) of nanofluids from nanoparticle type, base fluid, volume fraction, temperature, flow velocity, thermal conductivity, specific heat, density and viscosity.</p></div></section>
-<section class="prow rv" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Kaggle CSV dataset of experimental and simulated nanofluid heat transfer data, with 80 percent for training, 20 percent for testing and standardised features.</li><li>Keras feedforward network with hidden layers of 32 and 16 neurons with ReLU and a linear output neuron.</li><li>Mean squared error loss and the Adam optimizer, for 50 epochs at batch size 32 with a 20 percent validation split.</li></ol></div></section>
-<section class="prow rv" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p class="ptext">Test mean squared error is about 1.66e5, which the report describes as acceptable given the data variability. Loss curves drop quickly in early epochs, then converge with training and validation close.</p></div></section>
-<section class="prow rv" aria-labelledby="h-validation"><h2 id="h-validation">Validation</h2><div class="pbody"><p class="ptext">A 20 percent held-out test set plus a 20 percent validation split during training.</p></div></section>
+<section class="prow rv" aria-labelledby="h-problem"><h2 id="h-problem">Problem</h2><div class="pbody"><p>Predict the heat transfer coefficient (W/m²K) of nanofluids from nanoparticle type, base fluid, volume fraction, temperature, flow velocity, thermal conductivity, specific heat, density and viscosity.</p></div></section>
+<section class="prow rv" aria-labelledby="h-method"><h2 id="h-method">Method</h2><div class="pbody"><ol class="steps"><li>Kaggle CSV dataset of experimental and simulated nanofluid heat transfer data, with 80 percent for training, 20 percent for testing and standardised features.</li><li>Keras feedforward network with hidden layers of 32 and 16 neurons with ReLU and a linear output neuron.</li><li>Mean squared error loss and the Adam optimizer, for 50 epochs at batch size 32 with a 20 percent validation split.</li></ol></div></section>
+<section class="prow rv" aria-labelledby="h-results"><h2 id="h-results">Results</h2><div class="pbody"><p class="ptext">Test mean squared error is 165,647.18 in the notebook (about 1.66 × 10⁵), and its square root is about 407 W/m²K, which the report describes as acceptable given the data variability. Loss curves drop quickly in early epochs, then converge with training and validation close.</p><div class="fgrid below-figs" data-n="1"><figure class="fig wide"><a class="fplate plate is-dark" href="../assets/img/ann-regression/test-mse-notebook-output.png" data-fig data-n="FIG. 02" data-cap="Notebook output on the test set: Test Mean Squared Error 165647.18." data-cls="is-dark"><img src="../assets/img/ann-regression/test-mse-notebook-output.png" width="632" height="213" style="--nw:632" alt="Notebook output on the test set: Test Mean Squared Error 165647.18." decoding="async" loading="lazy"></a>
+  <figcaption><span class="fn">FIG. 02</span><span>Notebook output on the test set: Test Mean Squared Error 165647.18.</span></figcaption></figure></div></div></section>
+<section class="prow rv" aria-labelledby="h-validation"><h2 id="h-validation">Validation</h2><div class="pbody"><p class="ptext">A 20 percent held‑out test set plus a 20 percent validation split during training.</p></div></section>
 <section class="prow rv" aria-labelledby="h-limitations"><h2 id="h-limitations">Limitations</h2><div class="pbody"><ul class="bul"><li>No percent error or R squared is reported, so the MSE is hard to read against the output scale.</li><li>The public dataset mixes experimental and simulated data, and the split is a single one.</li></ul></div></section>
 <section class="prow rv" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2><div class="pbody"><ul class="tools"><li>TensorFlow</li><li>Keras</li></ul></div></section>
 </div>
@@ -56,7 +74,7 @@
 <nav class="wrap pnav" aria-label="Projects">
   <div class="pnav-row">
     <div class="pos-wrap"><p class="pos-n">18<small>/ 20</small></p><p><a class="all lnk" href="../index.html#work">All work</a></p></div>
-    <a class="pn prev" href="conveyor.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span> <span class="mono">17</span> Foot-Switch Material Handling Conveyor</span></a>
+    <a class="pn prev" href="conveyor.html"><span class="mono">Previous</span><span class="pn-t"><span class="pn-a" aria-hidden="true">&larr;</span> <span class="mono">17</span> Foot‑Switch Material Handling Conveyor</span></a>
     <a class="pn next" href="line-follower.html"><div class="plate fit-cover "><img src="../assets/img/line-follower/hero.jpg" width="800" height="600" style="--nw:800;--op:50% 58%" alt="" loading="lazy" decoding="async"><span class="crop" aria-hidden="true"></span></div><span class="pn-txt"><span class="mono">Next</span><span class="pn-t"><span class="mono">19</span> Arduino Line Following Robot <span class="pn-a" aria-hidden="true">&rarr;</span></span></span></a>
   </div>
 </nav>
@@ -66,7 +84,7 @@
   <div class="wrap">
     <div class="tb">
       <div><span class="k">Name</span><span class="v">Marig Shabbir Ansari</span></div>
-      <div><span class="k">Role</span><span class="v">Mechanical Engineer</span></div>
+      <div><span class="k">Title</span><span class="v">Mechanical Engineer</span></div>
       <div><span class="k">Sheet</span><span class="v sheetno">SHEET 1 OF 1</span></div>
       <div><span class="k">Year</span><span class="v">2026</span></div>
       <div><span class="k">Page</span><a class="v lnk" href="../index.html#top">Back to top</a></div>
