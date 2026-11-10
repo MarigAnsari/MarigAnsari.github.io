@@ -1334,7 +1334,3 @@ body.sub .totop svg { transform: none; }
   .bg-fig { overflow: visible; }
   .bg-fig svg { transform-origin: 100% 100%; transform: scale(var(--kz, 1.22)); }
 }
-/* home page only: a warmer cream, midway between the site cream and the earlier warm cream */
-body.home { --paper: #eee4cc; --band: #e2d8c0; --plate: #e6dcc6; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body.home { --paper: #040c19; --band: #121823; --plate: #151c25; --ink: #ebe0c7; } }
-:root[data-theme="dark"] body.home { --paper: #040c19; --band: #121823; --plate: #151c25; --ink: #ebe0c7; }
