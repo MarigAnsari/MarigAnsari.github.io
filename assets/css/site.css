@@ -396,6 +396,7 @@ html.js .work-grid:not([data-ready]) .proj:not([data-f]) { display: none; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
 .fchip { font: 500 12.5px var(--mono); border: 1px solid var(--line); padding: 0 14px; min-height: 40px; display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); }
 .fchip .n { color: var(--muted); }
+.fchip .ic { width: 14px; height: 14px; }
 .fchip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .fchip[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
 @media (max-width: 899px) { .fchip { min-height: 44px; } }
