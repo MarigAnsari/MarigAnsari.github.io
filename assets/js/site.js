@@ -151,7 +151,7 @@
      A card's stretched link sits over its image and meta box, so those are hit-tested by position. */
   (function () {
     if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var SEL = '.plate:not(.lb-plate),.tblock,.stat,.skgroup,.contact>li,.paper,.tb>div', ev, raf = 0, lit = [];
+    var SEL = '.plate:not(.lb-plate),.tblock,.stat,.skgroup,.contact>li,.paper,.tb>div,.spec,.eq', ev, raf = 0, lit = [];
     function paint(clear) {
       raf = 0;
       var t = ev.target, els = [], el = t.closest && t.closest(SEL), card = t.closest && t.closest('.proj');
@@ -206,24 +206,22 @@
     });
   })();
 
-  /* floating two-way button: upper half of the page = bottom centre, points down, goes to the bottom;
-     lower half = top centre, points up, goes to the top. 45/55 percent hysteresis stops flicker at the midpoint. */
+  /* docked two-way scroll cell: the last cell of the section rail. Upper half of the page = arrow down, goes to the bottom;
+     lower half = arrow up, goes to the top. 45/55 percent hysteresis stops flicker at the midpoint. */
   (function () {
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop on is-down';
+    var frame = $('.frame'); if (!frame) return;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop is-down';
     b.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 15V3M3.5 8.5L9 3l5.5 5.5"/></svg>';
-    document.body.appendChild(b);
+    frame.appendChild(b); frame.classList.add('has-dock');
     var down = true, ticking = false;
     function apply() {
       b.classList.toggle('is-down', down); b.classList.toggle('is-up', !down);
       b.setAttribute('aria-label', down ? 'Go to bottom' : 'Back to top');
     }
-    var bar = $('.bar');
     function update() {
       ticking = false;
-      if (bar) b.style.setProperty('--bar-b', bar.getBoundingClientRect().bottom + 'px');
       var max = document.documentElement.scrollHeight - window.innerHeight;
-      if (max <= 0) { b.classList.remove('on'); return; }
-      b.classList.add('on');
+      b.disabled = max <= 0; if (max <= 0) return;
       var p = window.scrollY / max;
       if (down && p > 0.55) { down = false; apply(); } else if (!down && p < 0.45) { down = true; apply(); }
     }
@@ -235,6 +233,31 @@
       window.scrollTo({ top: toBottom ? document.documentElement.scrollHeight : 0, behavior: reduce ? 'auto' : 'smooth' });
       if (e.detail === 0 && !toBottom) { var m = $('.mark'); if (m) m.focus({ preventScroll: true }); }
     });
+  })();
+
+  /* project pages, On this page: the same scroll-spy as the section rail. The section whose heading has reached the anchor landing line (scroll-padding-top) is current
+     (the last one once the page is at its end); the phone strip scrolls sideways to keep the current link in view. Jumps are plain anchors. */
+  (function () {
+    var links = $$('[data-toc]'); if (!links.length) return;
+    var secs = []; links.forEach(function (a) { var id = a.getAttribute('href').slice(1); if (secs.indexOf(id) < 0) secs.push(id); });
+    var els = secs.map(function (id) { return document.getElementById(id); }), cur = null, ticking = false;
+    function mark(id) {
+      links.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + id;
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        var ul = on && a.closest('.pstrip ul');
+        if (ul && ul.offsetParent) ul.scrollTo({ left: a.offsetLeft - (ul.clientWidth - a.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    }
+    function update() {
+      ticking = false;
+      var y = (parseFloat(getComputedStyle(doc).scrollPaddingTop) || 120) + 16, id = null;   // just under where an anchor jump lands a heading
+      els.forEach(function (el, i) { if (el && el.getBoundingClientRect().top <= y) id = secs[i]; });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) id = secs[secs.length - 1];
+      if (id !== cur) { cur = id; mark(id); }
+    }
+    function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', req, { passive: true }); window.addEventListener('resize', req); update();
   })();
 
   /* figure lightbox: <dialog>, image at natural size on paper, arrows, Esc, focus trap */
