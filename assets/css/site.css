@@ -1233,8 +1233,8 @@ body.sub .totop svg { transform: none; }
 .hl-cell:active { background: var(--wash); }
 .hl-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 .hl-cell:focus-visible .hl-go { opacity: 1; transform: none; }
-.hl-cell .hl-txt { font-size: clamp(20px, 5.6vw, 26px); line-height: 1.05; text-wrap: balance; }
-@media (min-width: 1000px) { .hl-cell .hl-txt { font-size: clamp(16px, 1.6vw, 22px); } }
+.hl-cell .hl-txt { text-wrap: balance; }  /* same size as the other highlight numbers; wraps to two lines only where the cell is too narrow */
+
 .hl-row li { display: flex; }
 .hl-row .hl-cell { flex: 1; }
 @media (hover: hover) and (pointer: fine) { .hl-cell:hover .hl-n { color: var(--accent-text); } .hl-cell:hover .hl-go { opacity: 1; transform: none; } }
