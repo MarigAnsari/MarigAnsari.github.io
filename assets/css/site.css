@@ -79,11 +79,11 @@
 
 /* home page only (body.home): neutral cream paper and classic navy ink. Other pages keep the :root tokens above.
    To move the whole site to this palette, copy these values into :root, the dark media block and :root[data-theme="dark"]. */
-body.home { --paper: #f3ede1; --ink: #1c2b45; --muted: #545d6e; --rule: #c8c6c2; --band: #eae2d2; --grid: rgba(28, 43, 69, 0.14); --grid-major: rgba(28, 43, 69, 0.26); --accent: #a57f2c; --accent-text: #5c440f; --on-accent: #0a1220; --line: var(--ink); --plate: #eae5db; --plate-paper: #f7f3eb; --plate-line: rgba(28, 43, 69, 0.78); }
+body.home { --paper: #f3ede1; --ink: #040c19; --muted: #51545d; --rule: #c8c4bb; --band: #eae2d2; --grid: rgba(4, 12, 25, 0.12); --grid-major: rgba(4, 12, 25, 0.22); --accent: #a57f2c; --accent-text: #5c440f; --on-accent: #040c19; --line: var(--ink); --plate: #eae5db; --plate-paper: #f7f3eb; --plate-line: rgba(4, 12, 25, 0.78); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) body.home { --paper: #131d30; --ink: #ece5d6; --muted: #a2a19e; --rule: #363d4b; --band: #18243a; --grid: rgba(236, 229, 214, 0.12); --grid-major: rgba(236, 229, 214, 0.24); --accent: #d9b25e; --accent-text: #d9b25e; --on-accent: #131d30; --line: color-mix(in srgb, var(--ink) 72%, var(--paper)); --plate: #232c3c; --plate-paper: #f1e7ce; --plate-line: rgba(236, 229, 214, 0.5); }
+  :root:not([data-theme="light"]) body.home { --paper: #040c19; --ink: #ece5d6; --muted: #9d9b96; --rule: #292d32; --band: #121823; --grid: rgba(236, 229, 214, 0.12); --grid-major: rgba(236, 229, 214, 0.24); --accent: #d9b25e; --accent-text: #d9b25e; --on-accent: #040c19; --line: color-mix(in srgb, var(--ink) 72%, var(--paper)); --plate: #151c25; --plate-paper: #f1e7ce; --plate-line: rgba(236, 229, 214, 0.5); }
 }
-:root[data-theme="dark"] body.home { --paper: #131d30; --ink: #ece5d6; --muted: #a2a19e; --rule: #363d4b; --band: #18243a; --grid: rgba(236, 229, 214, 0.12); --grid-major: rgba(236, 229, 214, 0.24); --accent: #d9b25e; --accent-text: #d9b25e; --on-accent: #131d30; --line: color-mix(in srgb, var(--ink) 72%, var(--paper)); --plate: #232c3c; --plate-paper: #f1e7ce; --plate-line: rgba(236, 229, 214, 0.5); }
+:root[data-theme="dark"] body.home { --paper: #040c19; --ink: #ece5d6; --muted: #9d9b96; --rule: #292d32; --band: #121823; --grid: rgba(236, 229, 214, 0.12); --grid-major: rgba(236, 229, 214, 0.24); --accent: #d9b25e; --accent-text: #d9b25e; --on-accent: #040c19; --line: color-mix(in srgb, var(--ink) 72%, var(--paper)); --plate: #151c25; --plate-paper: #f1e7ce; --plate-line: rgba(236, 229, 214, 0.5); }
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -775,9 +775,9 @@ figcaption { font-size: 14.5px; line-height: 1.45; color: var(--muted); max-widt
 /* ---------- lightbox ---------- */
 dialog.lb { border: 1px solid var(--line); padding: 0; background: var(--paper); color: var(--ink); max-width: min(96vw, 1500px); max-height: 96dvh; width: auto; overflow: hidden; }
 dialog.lb::backdrop { background: rgba(4, 12, 25, 0.74); }
-body.home dialog.lb::backdrop { background: rgba(28, 43, 69, 0.74); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body.home dialog.lb::backdrop { background: rgba(19, 29, 48, 0.74); } }
-:root[data-theme="dark"] body.home dialog.lb::backdrop { background: rgba(19, 29, 48, 0.74); }
+body.home dialog.lb::backdrop { background: rgba(4, 12, 25, 0.74); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body.home dialog.lb::backdrop { background: rgba(4, 12, 25, 0.74); } }
+:root[data-theme="dark"] body.home dialog.lb::backdrop { background: rgba(4, 12, 25, 0.74); }
 dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms var(--ease); }
 @keyframes lbin { from { opacity: 0; transform: scale(0.98); } }
 .lb-plate { display: flex; align-items: center; justify-content: center; border: 0; border-bottom: 1px solid var(--line); padding: 20px; min-height: min(40dvh, 320px); min-width: min(60vw, 520px); overflow: auto; flex: 1 1 auto; }
