@@ -1302,3 +1302,8 @@ body.sub .totop svg { transform: none; }
   .pplate.two { grid-row: 1; grid-column: 3; border-left: 1px solid var(--line); border-top: 0; height: auto; padding: 16px; }
   .psheet:has(.pplate.two) .spec { grid-row: 3; }
 }
+/* wide sheets: grow the Klann figure into the open space above and left of it (anchored at its bottom right, clear of the title block) */
+@media (min-width: 1240px) {
+  .bg-fig { overflow: visible; }
+  .bg-fig svg { transform-origin: 100% 100%; transform: scale(var(--kz, 1.22)); }
+}
