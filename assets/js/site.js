@@ -147,16 +147,16 @@
     document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); else play(); });
   })();
 
-  /* pointer glow: one passive listener, one rAF per frame. Boxes under the cursor get .lit and --mx/--my; CSS draws the glow (pointer-fine only).
+  /* pointer glow (text and number boxes only, never over pictures): one passive listener, one rAF per frame. Boxes under the cursor get .lit and --mx/--my; CSS draws the glow (pointer-fine only).
      A card's stretched link sits over its image and meta box, so those are hit-tested by position. */
   (function () {
     if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var SEL = '.plate:not(.lb-plate),.tblock,.stat,.skgroup,.contact>li,.paper,.tb>div,.spec,.eq', ev, raf = 0, lit = [];
+    var SEL = '.tblock,.stat,.skgroup,.contact>li,.paper,.tb>div,.spec,.eq', ev, raf = 0, lit = [];
     function paint(clear) {
       raf = 0;
       var t = ev.target, els = [], el = t.closest && t.closest(SEL), card = t.closest && t.closest('.proj');
       for (; el; el = el.parentElement && el.parentElement.closest(SEL)) els.push(el);
-      if (card) $$('.plate,.tblock', card).forEach(function (n) { if (els.indexOf(n) < 0) els.push(n); });
+      if (card) $$('.tblock', card).forEach(function (n) { if (els.indexOf(n) < 0) els.push(n); });
       var on = [];
       els.map(function (n) { return n.getBoundingClientRect(); }).forEach(function (r, i) {
         if (clear !== true && ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom) {
@@ -206,22 +206,24 @@
     });
   })();
 
-  /* docked two-way scroll cell: the last cell of the section rail. Upper half of the page = arrow down, goes to the bottom;
-     lower half = arrow up, goes to the top. 45/55 percent hysteresis stops flicker at the midpoint. */
+  /* floating two-way button: upper half of the page = bottom centre, points down, goes to the bottom;
+     lower half = top centre, points up, goes to the top. 45/55 percent hysteresis stops flicker at the midpoint. */
   (function () {
-    var frame = $('.frame'); if (!frame) return;
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop is-down';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'totop on is-down';
     b.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 15V3M3.5 8.5L9 3l5.5 5.5"/></svg>';
-    frame.appendChild(b); frame.classList.add('has-dock');
+    document.body.appendChild(b);
     var down = true, ticking = false;
     function apply() {
       b.classList.toggle('is-down', down); b.classList.toggle('is-up', !down);
       b.setAttribute('aria-label', down ? 'Go to bottom' : 'Back to top');
     }
+    var bar = $('.bar');
     function update() {
       ticking = false;
+      if (bar) b.style.setProperty('--bar-b', bar.getBoundingClientRect().bottom + 'px');
       var max = document.documentElement.scrollHeight - window.innerHeight;
-      b.disabled = max <= 0; if (max <= 0) return;
+      if (max <= 0) { b.classList.remove('on'); return; }
+      b.classList.add('on');
       var p = window.scrollY / max;
       if (down && p > 0.55) { down = false; apply(); } else if (!down && p < 0.45) { down = true; apply(); }
     }
