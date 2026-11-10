@@ -106,7 +106,13 @@
       render(); fade(); if (scroll) showChips();
     }
     chips.forEach(function (c) { c.addEventListener('click', function () { set(c.getAttribute('data-g'), false); }); });
-    if (more) more.addEventListener('click', function () { set(key === 'all' ? 'featured' : 'all', true); });
+    // work heading to just under the header
+    function toWorkTop() {
+      var zh = $('#work .zhead'), hb = head ? head.getBoundingClientRect().bottom : 0; if (!zh) return;
+      window.scrollTo({ top: window.scrollY + zh.getBoundingClientRect().top - hb - 24, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    // Featured to All keeps the featured cards in place (All starts with them, same order), so no scroll; every other switch rearranges, so go to the top of Work
+    if (more) more.addEventListener('click', function () { var stay = key === 'featured'; set(key === 'all' ? 'featured' : 'all', false); if (!stay) toWorkTop(); });
     cards.forEach(function (c) { if (!c.hasAttribute('data-f')) c.classList.remove('rv', 'in'); });
     render(); grid.setAttribute('data-ready', '');
     bar.hidden = false; if (more) more.hidden = false;
@@ -284,7 +290,7 @@
   (function () {
     var all = $$('a[data-fig]'), links = all;
     if (!all.length || !window.HTMLDialogElement) return;
-    function visible() { return all.filter(function (a) { return a.offsetParent !== null; }); }   // phones show a second copy of the hero figure; only the visible ones are in the viewer
+    function visible() { return all.filter(function (a) { return a.offsetParent !== null && !a.hasAttribute('data-tp'); }); }   // phones show a second copy of the hero figure; only the visible ones are in the viewer
     var dlg = document.createElement('dialog'); dlg.className = 'lb'; dlg.setAttribute('aria-label', 'Figure viewer');
     dlg.innerHTML = '<div class="plate lb-plate"></div><div class="lb-bar"><p class="lb-cap"><span class="lb-n"></span><span class="lb-t"></span></p>' +
       '<div class="lb-ctl"><span class="lb-pos"></span><button type="button" data-a="prev" aria-label="Previous figure">&larr;</button><button type="button" data-a="next" aria-label="Next figure">&rarr;</button><button type="button" data-a="close">Close</button></div></div>';
@@ -297,9 +303,9 @@
       n.textContent = a.getAttribute('data-n'); t.textContent = (a.getAttribute('data-cap') || '').replace(/([A-Za-z0-9])-(?=[A-Za-z0-9])/g, '$1‑');   // no break at a hyphen inside a word
       pos.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + links.length).slice(-2);
     }
-    function open(k, from) { opener = from; links = visible(); show(k); if (!dlg.open) dlg.showModal(); doc.classList.add('lb-open'); $('[data-a="close"]', dlg).focus(); }
+    function open(k, from, only) { opener = from; links = only || visible(); show(k); if (!dlg.open) dlg.showModal(); doc.classList.add('lb-open'); $('[data-a="close"]', dlg).focus(); }
     all.forEach(function (a) {
-      a.addEventListener('click', function (e) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); open(visible().indexOf(a), a); });
+      a.addEventListener('click', function (e) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); var v = visible(), k = a.hasAttribute('data-tp') ? v.findIndex(function (x) { return x.getAttribute('href') === a.getAttribute('href'); }) : v.indexOf(a); if (k < 0) open(0, a, [a]); else open(k, a); });
     });
     dlg.addEventListener('click', function (e) {
       var b = e.target.closest('button');

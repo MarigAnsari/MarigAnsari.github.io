@@ -245,22 +245,18 @@ a.stat:focus-visible .val { color: var(--accent-text); }
 /* Klann linkage figure as a faint drafting layer behind the hero. Decorative; plots itself once, then a gold dot circles the foot path. */
 .sheet > .cell, .sheet > .stats { position: relative; z-index: 1; }
 .bg-fig { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.bg-fig { --fi: color-mix(in srgb, var(--ink) 15%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 30%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 45%, var(--paper)); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bg-fig { --fi: color-mix(in srgb, var(--ink) 22%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 38%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 52%, var(--paper)); } }
-:root[data-theme="dark"] .bg-fig { --fi: color-mix(in srgb, var(--ink) 22%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 38%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 52%, var(--paper)); }
+.bg-fig { --fi: color-mix(in srgb, var(--ink) 50%, var(--paper)); --fd: color-mix(in srgb, var(--ink) 42%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 78%, var(--paper)); --ff: var(--accent); }
 
 .bg-fig .k-b, .bg-fig .k-p { stroke: var(--fi); stroke-width: 1.4; }
-.bg-fig .k-c, .bg-fig .k-ah { fill: var(--fi); }
-.bg-fig .k-g, .bg-fig .k-d, .bg-fig .k-rot { stroke: var(--fi); stroke-width: 1.2; }
+.bg-fig .k-c, .bg-fig .k-ah { fill: var(--fd); }
+.bg-fig .k-g, .bg-fig .k-rot { stroke: var(--fi); stroke-width: 1.2; }
+.bg-fig .k-d { stroke: var(--fd); stroke-width: 1.1; }
 .bg-fig .k-tx { fill: var(--ft); font-size: 11.5px !important; }
 .bg-fig .k-f { stroke: var(--ff); stroke-width: 2.2; }
 .bg-fig .k-dot { fill: var(--accent); r: 3; }
 .bg-fig { display: block; }
-@media (max-width: 899px) { .bg-fig { --fi: color-mix(in srgb, var(--ink) 26%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 44%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 70%, var(--paper)); } }
-@media (max-width: 899px) and (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bg-fig { --fi: color-mix(in srgb, var(--ink) 34%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 52%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 78%, var(--paper)); } }
-@media (max-width: 899px) { :root[data-theme="dark"] .bg-fig { --fi: color-mix(in srgb, var(--ink) 34%, var(--paper)); --ft: color-mix(in srgb, var(--ink) 52%, var(--paper)); --ff: color-mix(in srgb, var(--accent) 78%, var(--paper)); } }
-.bg-fig svg { position: absolute; left: 50%; bottom: 10px; height: clamp(184px, 32vw, 300px); width: auto; max-width: none; transform: translateX(-50%); }
-.sheet::after { content: ""; display: block; height: calc(clamp(184px, 32vw, 300px) + 16px); }
+.bg-fig svg { position: absolute; left: 50%; bottom: 26px; height: clamp(228px, 60vw, 320px); width: auto; max-width: none; transform: translateX(-50%); }
+.sheet::after { content: ""; display: block; height: calc(clamp(228px, 60vw, 320px) + 34px); }
 .k-f { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 3; stroke-linecap: round; }
 .k-rot { fill: none; stroke: var(--ink); stroke-width: 0.8; stroke-dasharray: 3 3; }
 .k-b { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
@@ -321,10 +317,11 @@ a.stat:focus-visible .val { color: var(--accent-text); }
 }
 /* wide sheets: the block is a narrow three-row stack and the drawing sits beside it, so the drawing keeps most of the height */
 @media (min-width: 1240px) {
-  .tblk { grid-template-columns: 1fr 1fr; width: 212px; }
+  .tblk { grid-template-columns: 1fr 1fr; width: 192px; }
+  .tblk > div { padding: 7px 8px 8px; }
   .tblk > div, .tblk > div:nth-child(-n+2) { grid-column: auto; }
   .tblk > div:first-child { grid-column: 1 / -1; }
-  .bg-fig { --kb: 0px; --kr: 224px; }
+  .bg-fig { --kb: 0px; --kr: 200px; }
 }
 
 /* ---------- zones (section heads) ---------- */
@@ -1280,4 +1277,28 @@ body.sub .totop svg { transform: none; }
   .about-text { margin-inline: auto; }
   .about-pic { justify-content: center; margin-top: var(--s-head); padding-bottom: 28px; }
   .about-pic .detail { max-width: 230px; }
+}
+
+/* rev26: project title block, framed image plate(s) in the empty right part of the sheet (PC only; phones and tablets keep the hero figure in the body) */
+.pplate { display: none; }
+@media (min-width: 900px) {
+  .psheet { grid-template-columns: 200px 1fr clamp(300px, 34%, 470px); }
+  .psheet:has(.pplate.two) { grid-template-columns: 200px 1fr; }
+  .pplate.two { grid-row: 2; grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); height: clamp(260px, 36vw, 340px); padding: 14px 16px; }
+  .psheet:has(.pplate.two) .pstrip { grid-row: 3; }
+  .psheet:has(.pplate.two) .spec { grid-row: 4; }
+  .pplate { display: flex; grid-row: 1; grid-column: 3; padding: 16px; gap: 12px; border-left: 1px solid var(--line); }
+  .pplate .plate { position: relative; flex: 1 1 0; min-width: 0; min-height: 200px; display: block; cursor: zoom-in; }
+  .pplate .plate::before { content: ""; position: absolute; inset: 7px; z-index: 2; pointer-events: none; opacity: 0.8; transition: opacity 0.18s ease-out; --c: linear-gradient(var(--plate-line), var(--plate-line)); --l: 12px; --w: 1px;
+    background:
+      var(--c) left top / var(--l) var(--w) no-repeat, var(--c) left top / var(--w) var(--l) no-repeat,
+      var(--c) right top / var(--l) var(--w) no-repeat, var(--c) right top / var(--w) var(--l) no-repeat,
+      var(--c) left bottom / var(--l) var(--w) no-repeat, var(--c) left bottom / var(--w) var(--l) no-repeat,
+      var(--c) right bottom / var(--l) var(--w) no-repeat, var(--c) right bottom / var(--w) var(--l) no-repeat; }
+  .pplate .plate:hover::before, .pplate .plate:focus-visible::before { --c: linear-gradient(var(--accent), var(--accent)); --l: 22px; --w: 2px; opacity: 1; }
+}
+@media (min-width: 1200px) {
+  .psheet:has(.pplate.two) { grid-template-columns: 200px 1fr clamp(440px, 46%, 640px); }
+  .pplate.two { grid-row: 1; grid-column: 3; border-left: 1px solid var(--line); border-top: 0; height: auto; padding: 16px; }
+  .psheet:has(.pplate.two) .spec { grid-row: 3; }
 }
