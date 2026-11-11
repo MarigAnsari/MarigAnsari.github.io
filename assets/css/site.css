@@ -445,6 +445,10 @@ html.js .work-grid:not([data-ready]) .proj:not([data-f]) { display: none; }
 .role2 { font-size: 17px; }
 .split-side .mono { color: var(--muted); }
 .tag { text-wrap: balance; align-self: flex-start; margin-top: 12px; border: 1px solid var(--line); padding: 4px 10px; text-transform: uppercase; letter-spacing: 0.08em; font-size: 11.5px; }
+@media (max-width: 999px) { .split-side .mono.gpa { display: block; } .mono.gpa .ic { display: inline-block; margin: 0 7px 0 0; vertical-align: -2px; } }   /* centred text: icon stays on the first line */
+.grades { margin-top: 14px; }
+.gr-h { font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; }
+.grades li { font-size: 15px; line-height: 1.45; padding: 4px 0; text-wrap: balance; }
 .rows { max-width: 68ch; }
 .rows li { border-top: 1px solid var(--rule); padding: 14px 0; }
 .rows li:first-child { border-top: 0; padding-top: 0; }
@@ -525,6 +529,12 @@ html.js .work-grid:not([data-ready]) .proj:not([data-f]) { display: none; }
 @media (min-width: 600px) and (max-width: 999px) {
   .skgroup { grid-template-columns: 200px minmax(0, 1fr); column-gap: 32px; padding: 20px 0; }
   .skgroup ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+}
+
+/* rev28: the longest group label (Lab and instrumentation) must not break inside a word on phones */
+@media (max-width: 599px) {
+  .skgroup { grid-template-columns: 40% minmax(0, 1fr); }
+  .skgroup h3 { font-size: 11px; letter-spacing: 0.05em; }
 }
 
 /* ---------- about ---------- */
