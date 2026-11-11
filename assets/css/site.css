@@ -445,7 +445,6 @@ html.js .work-grid:not([data-ready]) .proj:not([data-f]) { display: none; }
 .role2 { font-size: 17px; }
 .split-side .mono { color: var(--muted); }
 .tag { text-wrap: balance; align-self: flex-start; margin-top: 12px; border: 1px solid var(--line); padding: 4px 10px; text-transform: uppercase; letter-spacing: 0.08em; font-size: 11.5px; }
-@media (max-width: 999px) { .split-side .mono.gpa { display: block; } .mono.gpa .ic { display: inline-block; margin: 0 7px 0 0; vertical-align: -2px; } }   /* centred text: icon stays on the first line */
 .grades { margin-top: 14px; }
 .gr-h { font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; }
 .grades li { font-size: 15px; line-height: 1.45; padding: 4px 0; text-wrap: balance; }
@@ -858,7 +857,6 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
   .paper .status { justify-self: center; text-align: center; justify-content: center; }
   .paper-aside { justify-self: center; align-items: center; text-align: center; width: 100%; }
   .paper .tblock { max-width: 340px; margin-inline: auto; }
-  .courses li { justify-content: center; }
   .paper .paper-body { justify-self: center; }
   .meta { justify-content: center; }
   .feat .line, .proj .line { margin-inline: auto; }
@@ -950,7 +948,7 @@ dialog.lb[open] { display: flex; flex-direction: column; animation: lbin 180ms v
 .meta .yr { gap: 6px; }
 .contact .k { gap: 8px; }
 @media (max-width: 599px) { .contact .k { flex-direction: column; align-items: flex-start; gap: 4px; } }
-@media (max-width: 999px) { .split-side .mono { justify-content: center; } }
+@media (max-width: 999px) { .split-side .mono { display: block; } .split-side .mono .ic { display: inline-block; margin: 0 7px 0 0; vertical-align: -2px; } }   /* centred text: icon and text are one inline run, so a wrapped line keeps the icon at the start of line 1 */
 .doi a .ext, .pub a .ext { display: inline-block; width: 11px; height: 11px; margin-left: 6px; vertical-align: -1px; transition: transform 0.2s var(--ease); }
 
 /* section heading: a dimension-line rule under it, drawn from the centre outwards when the heading reveals */
@@ -1085,8 +1083,7 @@ html.tx *, html.tx *::before, html.tx *::after { transition: background-color 0.
 .paper .tblock { width: 100%; margin-top: 0; }
 .kf { max-width: 52ch; font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
 .kf-h { display: block; font: 500 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 4px; }
-.courses li { display: flex; align-items: flex-start; gap: 10px; }
-.courses li .ic { width: 14px; height: 14px; margin-top: 2px; color: var(--accent-text); }
+.courses li .ic { display: inline-block; width: 14px; height: 14px; margin: 0 10px 0 0; vertical-align: -2px; color: var(--accent-text); }   /* icon + text are one inline run: a wrapped item keeps the icon at the start of line 1, centred with it on phones */
 .stat-ic { width: 22px; height: 22px; color: var(--accent-text); }
 .paper h3 a { color: inherit; text-decoration: none; }
 @media (hover: hover) { .paper h3 a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; text-decoration-color: var(--accent); } }
