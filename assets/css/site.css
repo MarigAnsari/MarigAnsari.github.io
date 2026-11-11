@@ -1342,6 +1342,9 @@ body.sub .totop svg { transform: none; }
 /* wide sheets: grow the Klann figure into the open space above and left of it (anchored at its bottom right, clear of the title block) */
 @media (min-width: 1240px) {
   .bg-fig { overflow: visible; }
-  .bg-fig svg { transform-origin: 100% 100%; transform: scale(var(--kz, 1.22)); }
+  .bg-fig svg { transform-origin: 100% 100%; transform: scale(var(--kz, 1.12)); }
 }
-@media (min-width: 1240px) { .bg-fig svg { transform: translateY(var(--ky, 14px)) scale(var(--kz, 1.22)); } }  /* Klann sits a little lower, same size */
+@media (min-width: 1240px) { .bg-fig svg { transform: translateY(var(--ky, 14px)) scale(var(--kz, 1.12)); } }  /* Klann sits a little lower, same size */
+
+.stats-3 .val { display: flex; align-items: center; gap: 10px; }
+@media (max-width: 999px) { #experience .stats-3 .val { justify-content: center; } }
