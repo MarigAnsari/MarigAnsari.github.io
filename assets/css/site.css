@@ -1344,3 +1344,4 @@ body.sub .totop svg { transform: none; }
   .bg-fig { overflow: visible; }
   .bg-fig svg { transform-origin: 100% 100%; transform: scale(var(--kz, 1.22)); }
 }
+@media (min-width: 1240px) { .bg-fig svg { transform: translateY(var(--ky, 14px)) scale(var(--kz, 1.22)); } }  /* Klann sits a little lower, same size */
